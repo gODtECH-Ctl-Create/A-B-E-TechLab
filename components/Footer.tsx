@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Logo } from "./Header";
+export function Footer(){return <footer className="border-t border-black/10"><div className="container py-12"><div className="flex flex-col justify-between gap-10 md:flex-row"><div><Logo/><p className="mt-4 max-w-xs text-sm leading-6 text-black/55">Product · Design · Technology</p></div><div className="grid grid-cols-2 gap-x-16 gap-y-3 text-sm text-black/60"><Link href="/work">Work</Link><Link href="/services">Services</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div></div><div className="mt-16 flex flex-col justify-between gap-3 border-t border-black/10 pt-5 text-xs text-black/45 sm:flex-row"><span>© {new Date().getFullYear()} ABE TechLab. All rights reserved.</span><span>Built with intention.</span></div></div></footer>}
