@@ -10,7 +10,20 @@ button,input,textarea { font:inherit; }
 ::selection { background:var(--ink); color:var(--bg); }
 .font-display { font-family:'Space Grotesk',Arial,sans-serif; }
 .container { width:min(1180px,calc(100% - 40px)); margin-inline:auto; }
-.grid-bg { background-image:linear-gradient(to right,rgba(17,17,15,.055) 1px,transparent 1px),linear-gradient(to bottom,rgba(17,17,15,.055) 1px,transparent 1px); background-size:48px 48px; }
-.reveal { animation:reveal .7s ease both; }
-@keyframes reveal { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{animation:none}}
+.hero-shell { background:radial-gradient(circle at 85% 20%,rgba(183,255,60,.12),transparent 24%),linear-gradient(135deg,#f7f7f3 0%,#eeeeea 100%); }
+.reveal { animation:reveal .75s cubic-bezier(.22,1,.36,1) both; }
+.reveal-delay { animation:reveal .9s .12s cubic-bezier(.22,1,.36,1) both; }
+.service-card { position:relative; }
+.service-card::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(135deg,rgba(183,255,60,.12),transparent 45%); opacity:0; transition:opacity .3s ease; }
+.service-card:hover::after { opacity:1; }
+.project-visual { transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s ease; }
+.project-visual:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.35); }
+.process-item { transition:padding-left .3s ease,background-color .3s ease; }
+.process-item:hover { padding-left:10px; }
+.studio-visual { isolation:isolate; }
+.studio-visual::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.04) 50%,transparent 80%); transform:translateX(-100%); animation:shine 5s 1.2s ease-in-out infinite; }
+.cta-section::before { content:"ABE"; position:absolute; right:-.04em; bottom:-.22em; font-family:'Space Grotesk',sans-serif; font-size:clamp(12rem,30vw,30rem); font-weight:700; line-height:.7; letter-spacing:-.1em; color:rgba(17,17,15,.055); pointer-events:none; }
+@keyframes reveal { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+@keyframes shine { 0%,60%,100%{transform:translateX(-100%)} 78%{transform:translateX(100%)} }
+@media (max-width:700px){ .container{width:min(100% - 28px,1180px)} .process-item:hover{padding-left:0} }
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.reveal-delay{animation:none}.studio-visual::after{animation:none}.project-visual,.process-item{transition:none}}
