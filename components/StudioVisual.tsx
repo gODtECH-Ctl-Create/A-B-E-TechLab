@@ -44,8 +44,8 @@ export function StudioVisual() {
 
       <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[.2em] text-white/40">Independent product studio</p>
-          <p className="mt-2 max-w-xs text-sm leading-6 text-white/70">Ideas become products through strategy, design, technology and delivery.</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[.2em] text-white/40">Product & technology studio</p>
+          <p className="mt-2 max-w-xs text-sm leading-6 text-white/70">We build products and technology for people who learn, teach, work and build.</p>
         </div>
         <Sparkles className="mb-1 text-[#b7ff3c]" size={20} />
       </div>
@@ -65,7 +65,7 @@ export function ProjectVisual({ name, category, index }: { name: string; categor
         <div className="font-display text-4xl font-semibold tracking-[-.06em] md:text-5xl">{name}</div>
       </div>
       <div className="absolute bottom-6 left-7 right-7 flex items-center justify-between border-t border-white/15 pt-4 text-xs text-white/45">
-        <span>Product work</span>
+        <span>Explore project</span>
         <ArrowUpRight className="transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" size={18} />
       </div>
     </Link>
