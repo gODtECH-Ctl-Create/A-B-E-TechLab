@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
-import { projects, services } from "@/data/content";
+import { projects, services, focusAreas } from "@/data/content";
 import { ProjectVisual, StudioVisual } from "@/components/StudioVisual";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -11,6 +11,7 @@ const audiences = [
   ["Founders", "You have an idea and need help turning it into a real product."],
   ["Growing businesses", "You need a digital platform, internal system or new product."],
   ["Organizations", "You need technology that solves a specific operational problem."],
+  ["Education & learning", "You want to build better teaching, learning or education technology."],
   ["Existing products", "You already have something and need product, design or development support."],
 ];
 
@@ -23,13 +24,13 @@ export default function Home() {
             <div className="reveal">
               <p className="mb-7 inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[.22em] text-black/50">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#b7ff3c] ring-4 ring-[#b7ff3c]/20" />
-                Product · Design · Technology
+                Product · Education Technology · Design · Development
               </p>
               <h1 className="font-display max-w-3xl text-[clamp(3.5rem,7vw,6.8rem)] font-semibold leading-[.86] tracking-[-.075em]">
                 We turn ideas into products that work.
               </h1>
               <p className="mt-9 max-w-xl text-base leading-7 text-black/60 md:text-lg">
-                We help founders, businesses and organizations shape, design, build and launch useful digital products.
+                ABE TechLab helps founders, businesses, organizations and education teams shape, design, build and launch useful digital products and teaching technology.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link href="/contact" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-1">
@@ -43,9 +44,7 @@ export default function Home() {
                 <span>Strategy</span><span>Design</span><span>Development</span><span>Delivery</span>
               </div>
             </div>
-            <div className="reveal-delay">
-              <StudioVisual />
-            </div>
+            <div className="reveal-delay"><StudioVisual /></div>
           </div>
         </div>
       </section>
@@ -73,15 +72,25 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#ecece6]">
+        <div className="container py-24 md:py-32">
+          <div className="mb-12 grid gap-8 md:grid-cols-[.7fr_1.3fr] md:items-end">
+            <div><SectionLabel>Areas we build in</SectionLabel><h2 className="font-display text-4xl font-semibold leading-none tracking-[-.055em] md:text-6xl">Technology with a purpose.</h2></div>
+            <p className="max-w-xl text-sm leading-7 text-black/55">Our work is not limited to one industry. We build around real problems, including the way people learn, teach, work and access services.</p>
+          </div>
+          <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 md:grid-cols-3">
+            {focusAreas.map((area, index) => <article key={area.title} className="bg-[#f5f5ef] p-8 md:p-10"><span className="text-[10px] font-semibold tracking-[.18em] text-black/30">0{index + 1}</span><h3 className="font-display mt-16 text-2xl font-semibold tracking-[-.04em]">{area.title}</h3><p className="mt-3 text-sm leading-7 text-black/55">{area.text}</p></article>)}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#11110f] py-28 text-white md:py-36">
         <div className="container">
           <div className="mb-14 grid gap-8 md:grid-cols-[.7fr_1.3fr] md:items-end">
             <div><SectionLabel>Selected work</SectionLabel><h2 className="font-display text-4xl font-semibold leading-none tracking-[-.055em] md:text-6xl">Products we've helped shape.</h2></div>
-            <p className="max-w-xl text-sm leading-7 text-white/50">A selection of digital products, platforms and systems across learning, construction, identity and recruitment technology.</p>
+            <p className="max-w-xl text-sm leading-7 text-white/50">A selection of digital products, platforms and systems across education, learning, construction, identity and recruitment technology.</p>
           </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {projects.slice(0, 4).map((project, index) => <ProjectVisual key={project.name} name={project.name} category={project.category} index={index} />)}
-          </div>
+          <div className="grid gap-5 md:grid-cols-2">{projects.slice(0, 4).map((project, index) => <ProjectVisual key={project.name} name={project.name} category={project.category} index={index} />)}</div>
           <div className="mt-10"><Link href="/work" className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-sm font-semibold transition hover:border-white/50">See all work <ArrowUpRight size={16} /></Link></div>
         </div>
       </section>
@@ -96,25 +105,20 @@ export default function Home() {
       <section className="border-y border-black/10 bg-[#ecece6]">
         <div className="container grid gap-12 py-28 md:grid-cols-[1fr_1fr] md:items-center md:py-36">
           <div><SectionLabel>Who we work with</SectionLabel><h2 className="font-display text-5xl font-semibold leading-[.92] tracking-[-.06em] md:text-7xl">Built for people building something.</h2></div>
-          <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 sm:grid-cols-2">
-            {audiences.map(([title, text]) => <div key={title} className="bg-[#f5f5ef] p-7 transition hover:bg-white"><h3 className="font-display text-xl font-semibold tracking-[-.03em]">{title}</h3><p className="mt-3 text-sm leading-6 text-black/55">{text}</p></div>)}
-          </div>
+          <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 sm:grid-cols-2">{audiences.map(([title, text]) => <div key={title} className="bg-[#f5f5ef] p-7 transition hover:bg-white"><h3 className="font-display text-xl font-semibold tracking-[-.03em]">{title}</h3><p className="mt-3 text-sm leading-6 text-black/55">{text}</p></div>)}</div>
         </div>
       </section>
 
       <section className="border-b border-black/10 bg-[#ecece6]">
         <div className="container grid gap-12 pb-28 md:grid-cols-[1fr_1fr] md:items-center md:pb-36">
           <div><SectionLabel>About ABE TechLab</SectionLabel><h2 className="font-display text-5xl font-semibold leading-[.92] tracking-[-.06em] md:text-7xl">Small studio.<br />Serious products.</h2></div>
-          <div className="max-w-xl text-base leading-8 text-black/60"><p>ABE TechLab works at the intersection of product, design and technology. We help turn early ideas into structured products and help existing products become clearer, more useful and easier to grow.</p><p className="mt-5">We don't believe every project needs a large agency. It needs the right thinking, the right people and a clear path to shipping.</p></div>
+          <div className="max-w-xl text-base leading-8 text-black/60"><p>ABE TechLab works at the intersection of product, design and technology. Our work spans digital products and education technology, including tools for learning, teaching and professional development.</p><p className="mt-5">We help turn early ideas into structured products and help existing products become clearer, more useful and easier to grow.</p><p className="mt-5">We don't believe every project needs a large agency. It needs the right thinking, the right people and a clear path to shipping.</p></div>
         </div>
       </section>
 
       <section className="cta-section relative overflow-hidden bg-[#b7ff3c]">
         <div className="absolute -right-20 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-white/40 blur-[100px]" />
-        <div className="container relative flex flex-col gap-10 py-28 md:flex-row md:items-end md:justify-between md:py-36">
-          <div><SectionLabel>Start a conversation</SectionLabel><h2 className="font-display max-w-3xl text-5xl font-semibold leading-[.9] tracking-[-.065em] md:text-8xl">Have something worth building?</h2><p className="mt-7 max-w-xl text-base text-black/60">Tell us what you're working on. We'll help you figure out what comes next.</p></div>
-          <Link href="/contact" className="inline-flex shrink-0 items-center justify-center gap-3 bg-black px-7 py-5 text-sm font-semibold text-white transition hover:-translate-y-1">Start a project <ArrowUpRight size={18} /></Link>
-        </div>
+        <div className="container relative flex flex-col gap-10 py-28 md:flex-row md:items-end md:justify-between md:py-36"><div><SectionLabel>Start a conversation</SectionLabel><h2 className="font-display max-w-3xl text-5xl font-semibold leading-[.9] tracking-[-.065em] md:text-8xl">Have something worth building?</h2><p className="mt-7 max-w-xl text-base text-black/60">Tell us what you're working on. We'll help you figure out what comes next.</p></div><Link href="/contact" className="inline-flex shrink-0 items-center justify-center gap-3 bg-black px-7 py-5 text-sm font-semibold text-white transition hover:-translate-y-1">Start a project <ArrowUpRight size={18} /></Link></div>
       </section>
     </>
   );
