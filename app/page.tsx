@@ -7,6 +7,13 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="mb-5 text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">{children}</p>;
 }
 
+const audiences = [
+  ["Founders", "You have an idea and need help turning it into a real product."],
+  ["Growing businesses", "You need a digital platform, internal system or new product."],
+  ["Organizations", "You need technology that solves a specific operational problem."],
+  ["Existing products", "You already have something and need product, design or development support."],
+];
+
 export default function Home() {
   return (
     <>
@@ -22,7 +29,7 @@ export default function Home() {
                 We turn ideas into products that work.
               </h1>
               <p className="mt-9 max-w-xl text-base leading-7 text-black/60 md:text-lg">
-                ABE TechLab is a product and technology studio helping founders and businesses shape, design, build and launch useful digital products.
+                We help founders, businesses and organizations shape, design, build and launch useful digital products.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link href="/contact" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-1">
@@ -88,6 +95,15 @@ export default function Home() {
 
       <section className="border-y border-black/10 bg-[#ecece6]">
         <div className="container grid gap-12 py-28 md:grid-cols-[1fr_1fr] md:items-center md:py-36">
+          <div><SectionLabel>Who we work with</SectionLabel><h2 className="font-display text-5xl font-semibold leading-[.92] tracking-[-.06em] md:text-7xl">Built for people building something.</h2></div>
+          <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 sm:grid-cols-2">
+            {audiences.map(([title, text]) => <div key={title} className="bg-[#f5f5ef] p-7 transition hover:bg-white"><h3 className="font-display text-xl font-semibold tracking-[-.03em]">{title}</h3><p className="mt-3 text-sm leading-6 text-black/55">{text}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/10 bg-[#ecece6]">
+        <div className="container grid gap-12 pb-28 md:grid-cols-[1fr_1fr] md:items-center md:pb-36">
           <div><SectionLabel>About ABE TechLab</SectionLabel><h2 className="font-display text-5xl font-semibold leading-[.92] tracking-[-.06em] md:text-7xl">Small studio.<br />Serious products.</h2></div>
           <div className="max-w-xl text-base leading-8 text-black/60"><p>ABE TechLab works at the intersection of product, design and technology. We help turn early ideas into structured products and help existing products become clearer, more useful and easier to grow.</p><p className="mt-5">We don't believe every project needs a large agency. It needs the right thinking, the right people and a clear path to shipping.</p></div>
         </div>
