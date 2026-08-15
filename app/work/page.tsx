@@ -1,4 +1,27 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/data/content';
-export default function Work(){return <div><section className="container py-24 md:py-32"><p className="text-xs font-semibold uppercase tracking-[.18em] text-black/45">Selected work</p><h1 className="font-display mt-6 max-w-4xl text-6xl font-semibold leading-[.92] tracking-[-.07em] md:text-8xl">Products built around real problems.</h1><p className="mt-8 max-w-xl text-base leading-7 text-black/55">A selection of digital products and product systems we've helped shape across learning, construction, professional identity and recruitment technology.</p></section><section className="border-t border-black/10"><div className="container">{projects.map((p,i)=><Link href="/contact" key={p.name} className="group grid gap-8 border-b border-black/10 py-12 md:grid-cols-[80px_1fr_1fr_auto] md:items-center"><span className="text-xs text-black/35">0{i+1}</span><div><p className="text-xs uppercase tracking-[.14em] text-black/45">{p.category}</p><h2 className="font-display mt-2 text-3xl font-semibold tracking-[-.04em]">{p.name}</h2></div><p className="max-w-lg text-sm leading-6 text-black/55">{p.description}</p><ArrowUpRight className="transition group-hover:translate-x-1 group-hover:-translate-y-1"/></Link>)}</div></section></div>}
+import { ProjectVisual } from '@/components/StudioVisual';
+
+export default function Work(){
+  return <div>
+    <section className="hero-shell border-b border-black/10">
+      <div className="container py-24 md:py-32">
+        <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">Selected work</p>
+        <h1 className="font-display mt-6 max-w-5xl text-6xl font-semibold leading-[.86] tracking-[-.075em] md:text-8xl">Products built around real problems.</h1>
+        <p className="mt-8 max-w-xl text-base leading-7 text-black/55">A selection of digital products and product systems we've helped shape across learning, construction, professional identity and recruitment technology.</p>
+      </div>
+    </section>
+    <section className="bg-[#11110f] py-20 text-white md:py-28">
+      <div className="container grid gap-6 md:grid-cols-2">
+        {projects.map((p,i)=><ProjectVisual key={p.name} name={p.name} category={p.category} index={i} />)}
+      </div>
+    </section>
+    <section className="container py-24">
+      <div className="grid gap-10 md:grid-cols-[.7fr_1.3fr]">
+        <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/40">More than a showcase</p>
+        <div><h2 className="font-display text-4xl font-semibold tracking-[-.05em] md:text-6xl">Every product starts with a problem worth solving.</h2><p className="mt-6 max-w-2xl text-base leading-7 text-black/55">We care about the decisions behind the interface: what should exist, who it serves, how it works and what needs to happen to get it into the hands of real people.</p><Link href="/contact" className="mt-8 inline-flex items-center gap-2 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-1">Talk about your product <ArrowUpRight size={17}/></Link></div>
+      </div>
+    </section>
+  </div>
+}
