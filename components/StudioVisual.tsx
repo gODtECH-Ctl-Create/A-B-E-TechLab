@@ -9,6 +9,13 @@ const nodes = [
   { label: "SHIP", x: "70%", y: "76%" },
 ];
 
+const projectImages: Record<string, string> = {
+  TechTrack: "/images/techtrack.svg",
+  "Portfolio Platform": "/images/portfolio-platform.svg",
+  BuMarS: "/images/bumars.svg",
+  PROQUREMENT: "/images/procurement.svg",
+};
+
 export function StudioVisual() {
   return (
     <div className="studio-visual relative min-h-[520px] overflow-hidden border border-black/10 bg-[#11110f] text-white shadow-[0_30px_80px_rgba(0,0,0,.14)] md:min-h-[600px]">
@@ -56,15 +63,19 @@ export function StudioVisual() {
 export function ProjectVisual({ name, category, index }: { name: string; category: string; index: number }) {
   const accents = ["#b7ff3c", "#8f7cff", "#4dd9ff", "#ff9b71", "#f4e96b"];
   const accent = accents[index % accents.length];
+  const image = projectImages[name];
+
   return (
-    <Link href="/work" className="project-visual group relative block aspect-[16/10] overflow-hidden border border-black/10 bg-[#151513] text-white">
-      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-      <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full blur-[70px] transition duration-700 group-hover:scale-125" style={{ backgroundColor: accent, opacity: .45 }} />
-      <div className="absolute left-7 top-7 text-[10px] font-semibold uppercase tracking-[.2em] text-white/45">{category}</div>
-      <div className="absolute left-7 top-1/2 -translate-y-1/2">
-        <div className="font-display text-4xl font-semibold tracking-[-.06em] md:text-5xl">{name}</div>
-      </div>
-      <div className="absolute bottom-6 left-7 right-7 flex items-center justify-between border-t border-white/15 pt-4 text-xs text-white/45">
+    <Link href="/work" className="project-visual group relative block aspect-[16/10] overflow-hidden border border-white/10 bg-[#151513] text-white">
+      {image ? (
+        <img src={image} alt={`${name} project preview`} className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-[1.03] group-hover:opacity-95" loading="lazy" />
+      ) : (
+        <div className="absolute inset-0" style={{ background: `radial-gradient(circle at 75% 20%, ${accent}55, transparent 38%), #151513` }} />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/35" />
+      <div className="absolute left-7 right-7 top-7 text-[10px] font-semibold uppercase tracking-[.2em] text-white/70">{category}</div>
+      <div className="absolute bottom-20 left-7 right-7"><div className="font-display text-4xl font-semibold tracking-[-.06em] md:text-5xl">{name}</div></div>
+      <div className="absolute bottom-6 left-7 right-7 flex items-center justify-between border-t border-white/20 pt-4 text-xs text-white/65">
         <span>Explore project</span>
         <ArrowUpRight className="transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" size={18} />
       </div>
