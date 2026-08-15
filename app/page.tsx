@@ -24,13 +24,13 @@ export default function Home() {
             <div className="reveal">
               <p className="mb-7 inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[.22em] text-black/50">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#b7ff3c] ring-4 ring-[#b7ff3c]/20" />
-                Product · Education Technology · Design · Development
+                Product · Education · Teaching Technology · Design · Development
               </p>
               <h1 className="font-display max-w-3xl text-[clamp(3.5rem,7vw,6.8rem)] font-semibold leading-[.86] tracking-[-.075em]">
                 We turn ideas into products that work.
               </h1>
               <p className="mt-9 max-w-xl text-base leading-7 text-black/60 md:text-lg">
-                ABE TechLab helps founders, businesses, organizations and education teams shape, design, build and launch useful digital products and teaching technology.
+                ABE TechLab helps founders, businesses, organizations and education teams shape, design, build and launch useful digital products, learning platforms and teaching technology.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link href="/contact" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-1">
@@ -76,7 +76,7 @@ export default function Home() {
         <div className="container py-24 md:py-32">
           <div className="mb-12 grid gap-8 md:grid-cols-[.7fr_1.3fr] md:items-end">
             <div><SectionLabel>Areas we build in</SectionLabel><h2 className="font-display text-4xl font-semibold leading-none tracking-[-.055em] md:text-6xl">Technology with a purpose.</h2></div>
-            <p className="max-w-xl text-sm leading-7 text-black/55">Our work is not limited to one industry. We build around real problems, including the way people learn, teach, work and access services.</p>
+            <p className="max-w-xl text-sm leading-7 text-black/55">Our work is not limited to one industry. We build around real problems, including the way people learn, teach, build, work and access services.</p>
           </div>
           <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 md:grid-cols-3">
             {focusAreas.map((area, index) => <article key={area.title} className="bg-[#f5f5ef] p-8 md:p-10"><span className="text-[10px] font-semibold tracking-[.18em] text-black/30">0{index + 1}</span><h3 className="font-display mt-16 text-2xl font-semibold tracking-[-.04em]">{area.title}</h3><p className="mt-3 text-sm leading-7 text-black/55">{area.text}</p></article>)}
@@ -88,7 +88,7 @@ export default function Home() {
         <div className="container">
           <div className="mb-14 grid gap-8 md:grid-cols-[.7fr_1.3fr] md:items-end">
             <div><SectionLabel>Selected work</SectionLabel><h2 className="font-display text-4xl font-semibold leading-none tracking-[-.055em] md:text-6xl">Products we've helped shape.</h2></div>
-            <p className="max-w-xl text-sm leading-7 text-white/50">A selection of digital products, platforms and systems across education, learning, construction, identity and recruitment technology.</p>
+            <p className="max-w-xl text-sm leading-7 text-white/50">A selection of digital products, platforms and systems across teaching and learning, construction, professional identity and recruitment technology.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">{projects.slice(0, 4).map((project, index) => <ProjectVisual key={project.name} name={project.name} category={project.category} index={index} />)}</div>
           <div className="mt-10"><Link href="/work" className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-sm font-semibold transition hover:border-white/50">See all work <ArrowUpRight size={16} /></Link></div>
@@ -112,7 +112,7 @@ export default function Home() {
       <section className="border-b border-black/10 bg-[#ecece6]">
         <div className="container grid gap-12 pb-28 md:grid-cols-[1fr_1fr] md:items-center md:pb-36">
           <div><SectionLabel>About ABE TechLab</SectionLabel><h2 className="font-display text-5xl font-semibold leading-[.92] tracking-[-.06em] md:text-7xl">Small studio.<br />Serious products.</h2></div>
-          <div className="max-w-xl text-base leading-8 text-black/60"><p>ABE TechLab works at the intersection of product, design and technology. Our work spans digital products and education technology, including tools for learning, teaching and professional development.</p><p className="mt-5">We help turn early ideas into structured products and help existing products become clearer, more useful and easier to grow.</p><p className="mt-5">We don't believe every project needs a large agency. It needs the right thinking, the right people and a clear path to shipping.</p></div>
+          <div className="max-w-xl text-base leading-8 text-black/60"><p>ABE TechLab works at the intersection of product, design and technology. We build digital products across education, construction, professional identity and other problem spaces where technology can make work and learning better.</p><p className="mt-5">Education is a core part of that work. Through TechTrack, we build teaching and learning technology that supports structured learning, practical projects, bootcamps and professional development.</p><p className="mt-5">We don't believe every project needs a large agency. It needs the right thinking, the right people and a clear path to shipping.</p></div>
         </div>
       </section>
 
