@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
 import { projects, services, focusAreas } from "@/data/content";
 import { ProjectVisual, StudioVisual } from "@/components/StudioVisual";
+import HeroVisualCarousel from "@/components/HeroVisualCarousel";
 import TrustedBy from "@/components/TrustedBy";
 
 export const metadata: Metadata = {
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="mb-5 text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">{children}</p>;
 }
+
+const heroVisuals = [
+  { src: "https://images.pexels.com/photos/7988742/pexels-photo-7988742.jpeg?auto=compress&cs=tinysrgb&w=1800", alt: "Developers collaborating around a computer in a technology workspace" },
+  { src: "https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg?auto=compress&cs=tinysrgb&w=1800", alt: "Developer working with code on a laptop" },
+  { src: "https://images.pexels.com/photos/12899167/pexels-photo-12899167.jpeg?auto=compress&cs=tinysrgb&w=1800", alt: "Software developers collaborating on a coding project" },
+];
 
 const audiences = [
   ["Founders", "You have an idea and need help turning it into a real product."],
@@ -38,6 +45,7 @@ export default function Home() {
             </div>
             <div className="reveal-delay"><StudioVisual /></div>
           </div>
+          <HeroVisualCarousel visuals={heroVisuals} />
         </div>
       </section>
 
