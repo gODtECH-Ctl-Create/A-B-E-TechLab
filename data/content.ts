@@ -8,9 +8,10 @@ export const projects=[
 ];
 export const services=[
  {number:'01',title:'Product Strategy',text:'Turn ideas, requirements and problems into clear product direction.',items:['Product discovery','Requirements','Product roadmaps','MVP planning','Technical direction']},
- {number:'02',title:'Product Design',text:'Create digital experiences that are clear, useful and easy to navigate.',items:['User experience','User interface design','Wireframes','Prototypes','Design systems']},
- {number:'03',title:'Product Development',text:'Build reliable digital products and software systems.',items:['Web applications','Platforms','Dashboards','Internal tools','API integrations']},
- {number:'04',title:'Product Delivery',text:'Coordinate the people, technology and process required to move products from concept to launch.',items:['Project coordination','Product management','Development coordination','Testing','Launch preparation']}
+ {number:'02',title:'Research & Product Marketing',text:'Understand the market, users and opportunity, then position products so the right people can understand and adopt them.',items:['User & market research','Product positioning','Go-to-market thinking','Messaging','Launch strategy']},
+ {number:'03',title:'Product Design',text:'Create digital experiences that are clear, useful and easy to navigate.',items:['User experience','User interface design','Wireframes','Prototypes','Design systems']},
+ {number:'04',title:'Product Development',text:'Build reliable digital products and software systems.',items:['Web applications','Platforms','Dashboards','Internal tools','API integrations']},
+ {number:'05',title:'Product Delivery',text:'Coordinate the people, technology and process required to move products from concept to launch.',items:['Project coordination','Product management','Development coordination','Testing','Launch preparation']}
 ];
 
 export const focusAreas=[
