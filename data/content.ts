@@ -1,10 +1,11 @@
 export const projects=[
- {name:'TechTrack',category:'Education & teaching technology',description:'A learning and development platform combining structured courses, bootcamps and internship experiences for practical technology education.'},
- {name:'Portfolio Platform',category:'Professional identity technology',description:'A multi-tenant platform for creating professional identities, portfolios and career-focused profiles from one shareable link.'},
- {name:'BuMarS',category:'Construction ecosystem',description:'A construction ecosystem connecting people, businesses and digital tools around the way construction work gets done.'},
- {name:'PROQUREMENT',category:'Builders marketplace',description:'The BuMarS builders marketplace for discovering, comparing and connecting with building-material suppliers close to a project site.'},
- {name:'MeetMind / Vertica',category:'Recruitment technology',description:'AI-powered recruitment technology exploring interviews, candidate participation and structured evaluation.'}
+ {name:'Waste2Light',category:'Organisation · Product strategy & development',description:'Digital work for Waste2Light, including the Waste2Work workspace billing and customer-management system and the organisation website.'},
+ {name:'BuMarS',category:'Organisation · Construction technology',description:'Product strategy, product development and technology work across the BuMarS construction ecosystem and its digital procurement experiences.'},
+ {name:'Future Speakers International School',category:'Organisation · Education technology',description:'Product strategy and technology work around school operations, teaching and learning experiences.'},
+ {name:'Maka Tech',category:'Organisation · Technology',description:'Product strategy, technology and development work shaped around digital product and operational needs.'},
+ {name:'Cyfamod Technologies',category:'Organisation · School management technology',description:'Product strategy and development work around Cyfamod SMS, a school management platform.'}
 ];
+
 export const services=[
  {number:'01',title:'Product Strategy',text:'Turn ideas, requirements and problems into clear product direction.',items:['Product discovery','Requirements','Product roadmaps','MVP planning','Technical direction']},
  {number:'02',title:'Research & Product Marketing',text:'Understand the market, users and opportunity, then position products so the right people can understand and adopt them.',items:['User & market research','Product positioning','Go-to-market thinking','Messaging','Launch strategy']},
