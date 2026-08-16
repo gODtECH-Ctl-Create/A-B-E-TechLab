@@ -5,26 +5,26 @@ type Organization = {
 };
 
 const organizations: Organization[] = [
-  { name: 'Waste2Light', descriptor: 'Product & Technology' },
+  { name: 'Waste2Light', descriptor: 'Product Development & Management', logo: '/images/waste2light-logo.svg' },
   { name: 'BuMarS', descriptor: 'Product Strategy & Development', logo: '/images/bumars-logo.webp' },
   { name: 'Future Speakers International School', descriptor: 'Education Technology', logo: '/images/future-speakers-logo.svg' },
-  { name: 'Maka Tech', descriptor: 'Product Strategy & Technology' },
-  { name: 'Cyfamod Technologies', descriptor: 'Product & Technology', logo: '/images/cyfamod-logo.svg' },
+  { name: 'Maka Integrated', descriptor: 'Product Strategy & Programme Management' },
+  { name: 'Cyfamod Technologies', descriptor: 'Product Strategy, Management & Development', logo: '/images/cyfamod-logo.svg' },
 ];
 
 function Organization({ name, descriptor, logo }: Organization) {
   return (
-    <div className="flex w-[230px] shrink-0 flex-col items-center justify-center px-6 text-center md:w-[270px]">
-      <div className="flex h-20 w-full items-center justify-center">
+    <div className="flex w-[250px] shrink-0 flex-col items-center justify-center px-6 text-center md:w-[290px]">
+      <div className="flex h-20 w-full items-center justify-center rounded-xl">
         {logo ? (
           <img
             src={logo}
             alt={`${name} logo`}
-            width={210}
-            height={70}
+            width={220}
+            height={76}
             loading="eager"
             decoding="async"
-            className="block max-h-16 max-w-[210px] object-contain"
+            className="block max-h-[72px] max-w-[220px] object-contain"
           />
         ) : (
           <div className="font-display text-xl font-semibold tracking-[-.045em] text-black/75">
