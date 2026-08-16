@@ -1,13 +1,6 @@
 "use client";
-import type { Metadata } from 'next';
 import { FormEvent, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Contact ABE TechLab | Start a Project',
-  description: 'Talk to ABE TechLab about product research, strategy, marketing, design, development, education technology or an existing product.',
-  alternates: { canonical: '/contact' },
-};
 
 const needs = ['New product idea', 'Website or web application', 'Product research / strategy', 'Product marketing / positioning', 'Product design', 'Development', 'Product management', 'Education / teaching technology', 'Existing product improvement', 'Something else'];
 
