@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import AmbientPiano from "@/components/AmbientPiano";
 
 const siteUrl = "https://a-b-e-tech-lab.vercel.app";
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main>{children}</main>
         <Footer />
+        <AmbientPiano />
       </body>
     </html>
   );
