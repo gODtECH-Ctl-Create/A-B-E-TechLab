@@ -12,7 +12,11 @@ const organizations: Organization[] = [
   { name: 'Cyfamod Technologies', descriptor: 'Product & Technology', logo: '/images/cyfamod-logo.webp' },
 ];
 
+const rawAssetBase = 'https://raw.githubusercontent.com/gODtECH-Ctl-Create/A-B-E-TechLab/main/public/images';
+
 function Organization({ name, descriptor, logo }: Organization) {
+  const rawLogo = logo ? `${rawAssetBase}/${logo.split('/').pop()}` : undefined;
+
   return (
     <div className="flex w-[230px] shrink-0 flex-col items-center justify-center px-6 text-center md:w-[270px]">
       <div className="flex h-20 w-full items-center justify-center">
@@ -20,7 +24,15 @@ function Organization({ name, descriptor, logo }: Organization) {
           <img
             src={logo}
             alt={`${name} logo`}
-            className="max-h-16 max-w-[190px] object-contain"
+            width={190}
+            height={64}
+            loading="eager"
+            decoding="async"
+            className="block max-h-16 max-w-[190px] object-contain"
+            onError={(event) => {
+              const image = event.currentTarget;
+              if (rawLogo && image.src !== rawLogo) image.src = rawLogo;
+            }}
           />
         ) : (
           <div className="font-display text-xl font-semibold tracking-[-.045em] text-black/75">
