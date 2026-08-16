@@ -6,21 +6,20 @@ type Organization = {
   logo: string;
 };
 
-// Keep the supplied organisation marks as local, static assets. Using the
-// raster copies where they are available avoids browser/SVG rendering issues
-// and keeps the Trusted By strip visually consistent across deployments.
+// These are the supplied organisation logos stored as static local assets.
+// Do not replace them with recreated SVGs or generated approximations.
 const organizations: Organization[] = [
-  { name: 'Waste2Light', descriptor: 'Product Development & Management', logo: '/images/waste2light-logo.svg' },
+  { name: 'Waste2Light', descriptor: 'Product Development & Management', logo: '/images/trusted/waste2light-original.jpg' },
   { name: 'BuMarS', descriptor: 'Product Strategy & Development', logo: '/images/bumars-logo.webp' },
-  { name: 'Future Speakers International School', descriptor: 'Education Technology', logo: '/images/future-speakers-logo.webp' },
-  { name: 'Maka Integrated', descriptor: 'Product Strategy, Programme Management & OHealth Plus', logo: '/images/maka-integrated-logo.svg' },
-  { name: 'Cyfamod Technologies', descriptor: 'Product Strategy, Management & Development', logo: '/images/cyfamod-logo.webp' },
+  { name: 'Future Speakers International School', descriptor: 'Education Technology', logo: '/images/trusted/future-speakers-original.jpg' },
+  { name: 'Maka Integrated', descriptor: 'Product Strategy, Programme Management & OHealth Plus', logo: '/images/trusted/maka-integrated-original.jpg' },
+  { name: 'Cyfamod Technologies', descriptor: 'Product Strategy, Management & Development', logo: '/images/trusted/cyfamod-original.jpg' },
 ];
 
 function Organization({ name, descriptor, logo }: Organization) {
   return (
     <div className="flex w-[250px] shrink-0 flex-col items-center justify-center px-6 text-center md:w-[290px]">
-      <div className="flex h-20 w-full items-center justify-center rounded-sm bg-white">
+      <div className="flex h-20 w-full items-center justify-center rounded-sm bg-white px-2">
         <img
           src={logo}
           alt={`${name} logo`}
