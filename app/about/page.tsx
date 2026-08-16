@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import FounderCard from '@/components/FounderCard';
+
+export const metadata: Metadata = {
+  title: 'About ABE TechLab | Product & Technology Studio',
+  description: 'Learn about ABE TechLab, a product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.',
+  alternates: { canonical: '/about' },
+};
 
 const buildAreas = [
   ['01', 'Education & Teaching Technology', 'Learning platforms, teaching tools and digital experiences that help people learn, teach and develop.'],
