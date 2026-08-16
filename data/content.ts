@@ -17,5 +17,6 @@ export const services=[
 export const focusAreas=[
  {title:'Education & teaching technology',text:'Learning platforms, teaching tools and practical technology education experiences that make learning more structured, accessible and useful.'},
  {title:'Construction ecosystems',text:'Marketplaces and digital systems that improve how builders discover suppliers, source materials and coordinate construction work.'},
+ {title:'Healthcare & digital health',text:'Product strategy, programme management and technology direction for healthcare systems, including OHealth Plus, Maka Integrated’s main health product, and future healthcare products.'},
  {title:'Digital product systems',text:'Professional identity platforms, business tools and applications built around real user and operational needs.'}
 ];
