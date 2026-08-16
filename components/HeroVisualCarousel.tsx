@@ -17,12 +17,19 @@ export default function HeroVisualCarousel({ visuals, interval = DEFAULT_INTERVA
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {visuals.map((visual, index) => (
-        <img key={visual.src} src={visual.src} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.20]' : 'opacity-0'}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+        <img
+          key={visual.src}
+          src={visual.src}
+          alt=""
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.32] md:opacity-[.38]' : 'opacity-0'}`}
+          loading={index === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
       ))}
-      {/* Strong foreground wash keeps every heading, label and paragraph readable. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2]/98 via-[#f5f5f2]/96 via-[42%] to-[#f5f5f2]/62" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/99 via-[#f5f5f2]/55 to-[#f5f5f2]/78" />
-      <div className="absolute inset-0 bg-[#11110f]/[.12] mix-blend-multiply" />
+      {/* Keep the visuals clearly present while preserving strong text contrast. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2]/92 via-[#f5f5f2]/82 via-[42%] to-[#f5f5f2]/48" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/94 via-[#f5f5f2]/42 to-[#f5f5f2]/65" />
+      <div className="absolute inset-0 bg-[#11110f]/[.08] mix-blend-multiply" />
     </div>
   );
 }
