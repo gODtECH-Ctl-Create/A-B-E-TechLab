@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
 import { projects, services, focusAreas } from "@/data/content";
 import { ProjectVisual, StudioVisual } from "@/components/StudioVisual";
 import TrustedBy from "@/components/TrustedBy";
+
+export const metadata: Metadata = {
+  title: "ABE TechLab | Product, Research, Education & Technology",
+  description: "ABE TechLab researches, shapes, designs, builds and positions digital products, including education and teaching technology.",
+  alternates: { canonical: '/' },
+};
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="mb-5 text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">{children}</p>;
