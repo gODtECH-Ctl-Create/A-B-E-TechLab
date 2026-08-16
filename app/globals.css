@@ -24,10 +24,10 @@ button,input,textarea { font:inherit; }
 .studio-visual { isolation:isolate; }
 .studio-visual::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.04) 50%,transparent 80%); transform:translateX(-100%); animation:shine 5s 1.2s ease-in-out infinite; }
 .cta-section::before { content:"ABE"; position:absolute; right:-.04em; bottom:-.22em; font-family:'Space Grotesk',sans-serif; font-size:clamp(12rem,30vw,30rem); font-weight:700; line-height:.7; letter-spacing:-.1em; color:rgba(17,17,15,.055); pointer-events:none; }
-.trusted-marquee { animation:trusted-scroll 28s linear infinite; }
-.group:hover .trusted-marquee { animation-play-state:paused; }
+.trusted-marquee { width:max-content; will-change:transform; animation:trusted-scroll 22s linear infinite; }
+.trusted-marquee:hover { animation-play-state:paused; }
 @keyframes reveal { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 @keyframes shine { 0%,60%,100%{transform:translateX(-100%)} 78%{transform:translateX(100%)} }
-@keyframes trusted-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes trusted-scroll { from{transform:translate3d(0,0,0)} to{transform:translate3d(-50%,0,0)} }
 @media (max-width:700px){ .container{width:min(100% - 28px,1180px)} .process-item:hover{padding-left:0} .grid-bg{background-size:40px 40px} }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.reveal-delay{animation:none}.studio-visual::after,.trusted-marquee{animation:none}.project-visual,.process-item{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.reveal-delay{animation:none}.studio-visual::after{animation:none}.trusted-marquee{animation-duration:60s}.project-visual,.process-item{transition:none}}
