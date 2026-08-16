@@ -1,9 +1,9 @@
 export const projects=[
- {name:'Waste2Light',category:'Organisation · Product strategy & development',description:'Digital work for Waste2Light, including the Waste2Work workspace billing and customer-management system and the organisation website.'},
- {name:'BuMarS',category:'Organisation · Construction technology',description:'Product strategy, product development and technology work across the BuMarS construction ecosystem and its digital procurement experiences.'},
- {name:'Future Speakers International School',category:'Organisation · Education technology',description:'Product strategy and technology work around school operations, teaching and learning experiences.'},
- {name:'Maka Tech',category:'Organisation · Technology',description:'Product strategy, technology and development work shaped around digital product and operational needs.'},
- {name:'Cyfamod Technologies',category:'Organisation · School management technology',description:'Product strategy and development work around Cyfamod SMS, a school management platform.'}
+ {name:'Waste2Light',category:'Product development · Product management · Web',description:'Product development and management for Waste2Light, including the Waste2Work workspace billing and customer-management system, alongside website design and development.'},
+ {name:'BuMarS',category:'Product management · Product development',description:'Product management and development across the BuMarS construction ecosystem, shaping digital procurement experiences and the systems behind them.'},
+ {name:'Future Speakers International School',category:'Product strategy · Education technology',description:'Product strategy and technology work supporting school operations, teaching and learning experiences, including digital systems built around the school’s needs.'},
+ {name:'Maka Tech',category:'Product strategy · Product management · Administration',description:'Product strategy, product management and administrative technology work supporting digital product direction and operational needs.'},
+ {name:'Cyfamod Technologies',category:'Product management · Product strategy · Development',description:'Product management, product strategy and development work around Cyfamod SMS, a school management platform.'}
 ];
 
 export const services=[
