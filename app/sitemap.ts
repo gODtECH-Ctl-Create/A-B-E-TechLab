@@ -4,7 +4,7 @@ import { insights } from '@/lib/insights';
 const baseUrl = 'https://a-b-e-tech-lab.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/products', '/programs', '/work', '/services', '/about', '/insights', '/team', '/contact'];
+  const routes = ['', '/products', '/programs', '/services', '/about', '/insights', '/team', '/contact'];
   const pages = routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
