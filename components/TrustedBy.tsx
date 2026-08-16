@@ -7,9 +7,9 @@ type Organization = {
 const organizations: Organization[] = [
   { name: 'Waste2Light', descriptor: 'Product & Technology' },
   { name: 'BuMarS', descriptor: 'Product Strategy & Development', logo: '/images/bumars-logo.webp' },
-  { name: 'Future Speakers International School', descriptor: 'Education Technology', logo: '/images/future-speakers-logo.webp' },
+  { name: 'Future Speakers International School', descriptor: 'Education Technology', logo: '/images/future-speakers-logo.svg' },
   { name: 'Maka Tech', descriptor: 'Product Strategy & Technology' },
-  { name: 'Cyfamod Technologies', descriptor: 'Product & Technology', logo: '/images/cyfamod-logo.webp' },
+  { name: 'Cyfamod Technologies', descriptor: 'Product & Technology', logo: '/images/cyfamod-logo.svg' },
 ];
 
 function Organization({ name, descriptor, logo }: Organization) {
@@ -20,11 +20,11 @@ function Organization({ name, descriptor, logo }: Organization) {
           <img
             src={logo}
             alt={`${name} logo`}
-            width={190}
-            height={64}
+            width={210}
+            height={70}
             loading="eager"
             decoding="async"
-            className="block max-h-16 max-w-[190px] object-contain"
+            className="block max-h-16 max-w-[210px] object-contain"
           />
         ) : (
           <div className="font-display text-xl font-semibold tracking-[-.045em] text-black/75">
