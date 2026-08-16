@@ -3,7 +3,6 @@ export const projects=[
  {name:'Portfolio Platform',category:'Professional identity technology',description:'A multi-tenant platform for creating professional identities, portfolios and career-focused profiles from one shareable link.'},
  {name:'BuMarS',category:'Construction ecosystem',description:'A construction ecosystem connecting people, businesses and digital tools around the way construction work gets done.'},
  {name:'PROQUREMENT',category:'Builders marketplace',description:'The BuMarS builders marketplace for discovering, comparing and connecting with building-material suppliers close to a project site.'},
- {name:'Credan',category:'Trust & identity',description:'A trust-oriented product built around identity and a structured TrustScore experience.'},
  {name:'MeetMind / Vertica',category:'Recruitment technology',description:'AI-powered recruitment technology exploring interviews, candidate participation and structured evaluation.'}
 ];
 export const services=[
