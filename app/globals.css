@@ -11,7 +11,11 @@ button,input,textarea,select { font:inherit; }
 .font-display { font-family:'Space Grotesk',Arial,sans-serif; }
 .container { width:min(1180px,calc(100% - 40px)); margin-inline:auto; }
 .grid-bg { background-image:linear-gradient(to right,rgba(17,17,15,.055) 1px,transparent 1px),linear-gradient(to bottom,rgba(17,17,15,.055) 1px,transparent 1px); background-size:64px 64px; }
-.hero-shell { position:relative; isolation:isolate; background:radial-gradient(circle at 85% 20%,rgba(183,255,60,.12),transparent 24%),linear-gradient(135deg,#f7f7f3 0%,#eeeeea 100%); }
+
+/* Homepage hero: keep the content grid constrained, but make the visual treatment truly full-bleed. */
+.hero-shell { position:relative; isolation:isolate; overflow:hidden; background:var(--bg); }
+.hero-shell::before { content:""; position:absolute; z-index:-2; top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%); background:radial-gradient(circle at 85% 20%,rgba(183,255,60,.12),transparent 24%),linear-gradient(135deg,#f7f7f3 0%,#eeeeea 100%); pointer-events:none; }
+.hero-shell::after { content:""; position:absolute; z-index:-1; top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%); background:linear-gradient(90deg,rgba(255,255,255,.12),transparent 18%,transparent 82%,rgba(183,255,60,.05)); pointer-events:none; }
 .hero-shell > .container { position:relative; }
 .hero-shell > .container > .grid { position:relative; z-index:10; }
 .hero-shell > .container > .pointer-events-none { z-index:0; }
