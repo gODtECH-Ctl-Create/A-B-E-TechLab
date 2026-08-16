@@ -10,7 +10,7 @@ export type TeamMember = {
 export const team: TeamMember[] = [
   {
     name: 'Ayo Richard Abe',
-    role: 'Founder & Product Lead',
+    role: 'Founder & CEO',
     type: 'Human',
     bio: 'Leads ABE TechLab across product strategy, research, technology, product development and product marketing.',
     initials: 'ARA',
