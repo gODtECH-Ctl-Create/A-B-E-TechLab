@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/data/content';
 import { ProjectVisual } from '@/components/StudioVisual';
+
+export const metadata: Metadata = {
+  title: 'Our Work | Digital Products & Technology',
+  description: 'Explore digital products and systems shaped by ABE TechLab across education, construction, professional identity and recruitment technology.',
+  alternates: { canonical: '/work' },
+};
 
 export default function Work(){
   return <div>
