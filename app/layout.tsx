@@ -18,22 +18,8 @@ export const metadata: Metadata = {
   publisher: "ABE TechLab",
   category: "technology",
   keywords: [
-    "ABE TechLab",
-    "product strategy",
-    "product research",
-    "market research",
-    "product marketing",
-    "product positioning",
-    "product design",
-    "product development",
-    "education technology",
-    "teaching technology",
-    "learning platforms",
-    "construction technology",
-    "digital products",
-    "technology studio",
+    "ABE TechLab", "product strategy", "product research", "market research", "product marketing", "product positioning", "product design", "product development", "education technology", "teaching technology", "learning platforms", "construction technology", "digital products", "technology studio"
   ],
-  alternates: { canonical: siteUrl },
   openGraph: {
     title: "ABE TechLab | Product, Research, Education & Technology",
     description: "We research, shape, design, build and position digital products, including technology for learning and teaching.",
@@ -50,13 +36,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
 };
 
@@ -67,20 +47,9 @@ const structuredData = {
   url: siteUrl,
   email: "abeayo6@gmail.com",
   description: "Product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.",
-  founder: {
-    "@type": "Person",
-    name: "Ayo Richard ABE",
-  },
+  founder: { "@type": "Person", name: "Ayo Richard ABE" },
   areaServed: "Worldwide",
-  knowsAbout: [
-    "Product research",
-    "Product strategy",
-    "Product marketing",
-    "Product design",
-    "Software development",
-    "Education technology",
-    "Teaching technology",
-  ],
+  knowsAbout: ["Product research", "Product strategy", "Product marketing", "Product design", "Software development", "Education technology", "Teaching technology"],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
