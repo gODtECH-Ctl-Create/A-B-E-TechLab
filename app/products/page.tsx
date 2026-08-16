@@ -3,39 +3,35 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Products & Platforms',
-  description: 'Products and digital platforms built or shaped by ABE TechLab across education, business and technology.',
+  title: 'Products | ABE TechLab',
+  description: 'Explore products created, owned and developed under ABE TechLab across technology, education and digital product systems.',
   alternates: { canonical: '/products' },
 };
 
 const products = [
   {
     name: 'TechTrack',
-    type: 'Education technology platform',
-    description: 'A practical learning and development platform that brings courses, bootcamps, internships and technology programs into one experience.',
+    type: 'ABE TechLab product · Education technology',
+    status: 'Active product',
+    description: 'A practical learning and development platform that brings courses, bootcamps, internships and technology programmes into a connected experience.',
     href: '/programs',
-    action: 'Explore programs',
-  },
-  {
-    name: 'PROQUREMENT',
-    type: 'Construction technology',
-    description: 'A builders marketplace experience shaped around the practical problem of finding and connecting with building-material suppliers.',
-    href: '/work',
-    action: 'View selected work',
+    action: 'Explore programmes',
   },
   {
     name: 'Portfolio Platform',
-    type: 'Professional identity technology',
-    description: 'A digital product experience for creating professional identities, portfolios and career-focused profiles from one shareable destination.',
+    type: 'ABE TechLab product · Professional identity technology',
+    status: 'Product in development',
+    description: 'A digital product system for creating professional identities, portfolios and career-focused profiles from one shareable destination.',
     href: '/work',
-    action: 'View selected work',
+    action: 'See selected work',
   },
   {
     name: 'MeetMind / Vertica',
-    type: 'Recruitment technology',
-    description: 'AI-assisted recruitment technology exploring structured interviews, candidate participation and evaluation workflows.',
+    type: 'ABE TechLab product · Recruitment technology',
+    status: 'In development',
+    description: 'AI-assisted recruitment technology exploring structured interviews, candidate participation and evaluation workflows. Deeper product treatment is tracked separately.',
     href: '/work',
-    action: 'View selected work',
+    action: 'See selected work',
   },
 ];
 
@@ -44,9 +40,9 @@ export default function ProductsPage() {
     <div>
       <section className="hero-shell border-b border-black/10">
         <div className="container py-24 md:py-32">
-          <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">Products & platforms</p>
-          <h1 className="font-display mt-6 max-w-5xl text-6xl font-semibold leading-[.86] tracking-[-.075em] md:text-8xl">Technology we shape into products people can use.</h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-black/55">A clearer home for the digital products and platforms ABE TechLab builds, shapes and develops across education, construction, professional identity and recruitment technology.</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/45">AB TechLab products</p>
+          <h1 className="font-display mt-6 max-w-5xl text-6xl font-semibold leading-[.86] tracking-[-.075em] md:text-8xl">Products we create and develop under the studio.</h1>
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-black/55">This page is for products belonging to or being developed directly under ABE TechLab. Client and partner work lives separately in Selected Work.</p>
         </div>
       </section>
 
@@ -54,7 +50,10 @@ export default function ProductsPage() {
         <div className="container grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2">
           {products.map((product, index) => (
             <article key={product.name} className="bg-[#11110f] p-8 transition hover:bg-[#191916] md:p-10">
-              <p className="text-[10px] text-white/35">0{index + 1}</p>
+              <div className="flex items-start justify-between gap-5">
+                <p className="text-[10px] text-white/35">0{index + 1}</p>
+                <span className="border border-white/10 px-3 py-2 text-[9px] font-semibold uppercase tracking-[.14em] text-white/45">{product.status}</span>
+              </div>
               <p className="mt-10 text-[10px] font-semibold uppercase tracking-[.18em] text-[#b7ff3c]">{product.type}</p>
               <h2 className="font-display mt-4 text-4xl font-semibold tracking-[-.05em] md:text-5xl">{product.name}</h2>
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/55">{product.description}</p>
@@ -66,11 +65,11 @@ export default function ProductsPage() {
 
       <section className="container py-24 md:py-32">
         <div className="grid gap-10 md:grid-cols-[.7fr_1.3fr]">
-          <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/40">How we build</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-black/40">Product philosophy</p>
           <div>
             <h2 className="font-display max-w-3xl text-4xl font-semibold leading-[.95] tracking-[-.055em] md:text-6xl">Research first. Product thinking throughout. Technology that serves the idea.</h2>
-            <p className="mt-7 max-w-2xl text-base leading-7 text-black/55">Products are not just interfaces. We work across research, strategy, positioning, design and development so the thing being built makes sense before it scales.</p>
-            <Link href="/services" className="mt-8 inline-flex items-center gap-2 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5">See our capabilities <ArrowUpRight size={16} /></Link>
+            <p className="mt-7 max-w-2xl text-base leading-7 text-black/55">We treat products as systems, not just interfaces. Research, strategy, positioning, design and development work together so the thing being built makes sense before it scales.</p>
+            <Link href="/insights" className="mt-8 inline-flex items-center gap-2 bg-black px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5">Read our insights <ArrowUpRight size={16} /></Link>
           </div>
         </div>
       </section>
