@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Maka Integrated logo">
+  <rect width="1080" height="1080" fill="#fff"/>
+  <g transform="translate(165 205)">
+    <path d="M205 88 392 230 392 520 270 610 270 315 150 222Z" fill="#142b57"/>
+    <path d="M392 230 580 88 580 222 463 315 463 610 392 520Z" fill="#2376ea"/>
+    <path d="M580 222 720 325 720 505 608 575 608 315Z" fill="#2376ea"/>
+    <path d="M270 315 392 405 463 355 463 610 392 650 270 570Z" fill="#fff"/>
+    <path d="M122 532 C300 405 492 330 684 240 C755 206 813 204 848 233 C808 218 776 234 742 260 C566 395 386 500 178 574Z" fill="#142b57"/>
+    <path d="M145 540 C330 485 518 394 706 268 C750 239 787 222 822 225 C789 238 757 260 724 287 C529 448 330 552 150 590Z" fill="#2376ea" opacity=".95"/>
+    <path d="M392 0v150M330 56 392 0 454 56M348 105 392 150 436 105" fill="none" stroke="#2376ea" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="392" cy="174" r="24" fill="#2376ea"/>
+    <circle cx="330" cy="56" r="20" fill="#142b57"/>
+    <circle cx="454" cy="56" r="20" fill="#2376ea"/>
+  </g>
+</svg>
