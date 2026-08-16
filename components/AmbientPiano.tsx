@@ -17,7 +17,7 @@ type YouTubeApi = {
     element: HTMLElement,
     options: {
       videoId: string;
-      playerVars?: Record<string, number>;
+      playerVars?: Record<string, string | number>;
       events?: { onReady?: () => void; onError?: () => void };
     }
   ) => YouTubePlayer;
@@ -99,7 +99,7 @@ export default function AmbientPiano() {
         playerRef.current.destroy();
         playerRef.current = null;
       }
-      if (w.onYouTubeIframeAPIReady === startPlayer) w.onYouTubeIframeAPIReady = previousReady;
+      if (w.onYouTubeIframeAPIReady) w.onYouTubeIframeAPIReady = previousReady;
     };
   }, []);
 
