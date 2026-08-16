@@ -12,13 +12,13 @@ button,input,textarea,select { font:inherit; }
 .container { width:min(1180px,calc(100% - 40px)); margin-inline:auto; }
 .grid-bg { background-image:linear-gradient(to right,rgba(17,17,15,.055) 1px,transparent 1px),linear-gradient(to bottom,rgba(17,17,15,.055) 1px,transparent 1px); background-size:64px 64px; }
 
-/* Homepage hero: force the section itself to span the viewport, even if a parent layout constrains it. */
-.hero-shell { position:relative; isolation:isolate; overflow:hidden; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); background:var(--bg); }
+.hero-shell { position:relative; isolation:isolate; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); overflow:hidden; background:var(--bg); }
 .hero-shell::before { content:""; position:absolute; z-index:-2; inset:0; background:radial-gradient(circle at 85% 20%,rgba(183,255,60,.12),transparent 24%),linear-gradient(135deg,#f7f7f3 0%,#eeeeea 100%); pointer-events:none; }
 .hero-shell::after { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(255,255,255,.12),transparent 18%,transparent 82%,rgba(183,255,60,.05)); pointer-events:none; }
-.hero-shell > .container { position:relative; }
+.hero-shell > .container { position:relative; z-index:10; }
+/* The rotating hero imagery is mounted inside the constrained content container, so deliberately break it out to the viewport edges. */
+.hero-shell > .container > .pointer-events-none { position:absolute; z-index:0; top:0; bottom:0; left:50%; right:auto; width:100vw; height:100%; transform:translateX(-50%); }
 .hero-shell > .container > .grid { position:relative; z-index:10; }
-.hero-shell > .container > .pointer-events-none { z-index:0; }
 .reveal { animation:reveal .75s cubic-bezier(.22,1,.36,1) both; }
 .reveal-delay { animation:reveal .9s .12s cubic-bezier(.22,1,.36,1) both; }
 .service-card { position:relative; }
