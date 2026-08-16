@@ -17,11 +17,12 @@ export default function HeroVisualCarousel({ visuals, interval = DEFAULT_INTERVA
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {visuals.map((visual, index) => (
-        <img key={visual.src} src={visual.src} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.34]' : 'opacity-0'}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+        <img key={visual.src} src={visual.src} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.28]' : 'opacity-0'}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2] via-[#f5f5f2]/90 via-[42%] to-[#f5f5f2]/35" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/95 via-transparent to-[#f5f5f2]/35" />
-      <div className="absolute inset-0 bg-[#11110f]/[.06] mix-blend-multiply" />
+      {/* Stronger readability overlay: the image remains visible while the foreground copy stays crisp. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2] via-[#f5f5f2]/95 via-[38%] to-[#f5f5f2]/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/97 via-[#f5f5f2]/25 to-[#f5f5f2]/55" />
+      <div className="absolute inset-0 bg-[#11110f]/[.08] mix-blend-multiply" />
     </div>
   );
 }
