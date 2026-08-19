@@ -17,43 +17,34 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please complete the required fields correctly.' }, { status: 400 });
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const destination = process.env.CONTACT_EMAIL ?? 'abeayo6@gmail.com';
-
-    if (!apiKey) {
-      console.error('RESEND_API_KEY is not configured.');
+    const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
+    if (!scriptUrl) {
+      console.error('GOOGLE_APPS_SCRIPT_URL is not configured.');
       return NextResponse.json({ error: 'Email delivery is not configured yet.' }, { status: 503 });
     }
 
-    const html = `
-      <h2>New ABE TechLab enquiry</h2>
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Company / Organization:</strong> ${escapeHtml(company || 'Not provided')}</p>
-      <p><strong>Need:</strong> ${escapeHtml(need)}</p>
-      <p><strong>Timeline:</strong> ${escapeHtml(timeline || 'Not provided')}</p>
-      <p><strong>Project:</strong></p>
-      <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
-    `;
-
-    const response = await fetch('https://api.resend.com/emails', {
+    const response = await fetch(scriptUrl, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: process.env.CONTACT_FROM_EMAIL ?? 'ABE TechLab <onboarding@resend.dev>',
-        to: [destination],
-        reply_to: email,
-        subject: `New ABE TechLab enquiry from ${name}`,
-        html,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, company, need, timeline, message }),
+      cache: 'no-store',
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Resend delivery failed:', errorText);
+      console.error('Google Apps Script delivery failed:', errorText);
+      return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
+    }
+
+    let result: { ok?: boolean; error?: string } = {};
+    try {
+      result = await response.json();
+    } catch {
+      // Google Apps Script may return a non-JSON response depending on deployment settings.
+    }
+
+    if (result.ok === false) {
+      console.error('Google Apps Script rejected submission:', result.error);
       return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
     }
 
@@ -62,14 +53,4 @@ export async function POST(request: Request) {
     console.error('Contact submission failed:', error);
     return NextResponse.json({ error: 'Unable to process the enquiry.' }, { status: 500 });
   }
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/[&<>'"]/g, (character) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;',
-  })[character] ?? character);
 }
