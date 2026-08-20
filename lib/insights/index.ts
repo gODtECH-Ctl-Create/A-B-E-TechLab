@@ -4,15 +4,25 @@ import whyProductResearchComesBeforeBuilding from './articles/why-product-resear
 import teachingTechnologyIsMoreThanAnLms from './articles/teaching-technology-is-more-than-an-lms';
 import fromConstructionProblemToProcurementPlatform from './articles/from-construction-problem-to-procurement-platform';
 import productMarketingStartsBeforeLaunch from './articles/product-marketing-starts-before-launch';
+import howWeApproachProductStrategy from './articles/how-we-approach-product-strategy';
+import whatToValidateBeforeBuildingAnMvp from './articles/what-to-validate-before-building-an-mvp';
+import buildingForAfricanMarketsStartsWithContext from './articles/building-for-african-markets-starts-with-context';
+import designingSchoolTechnologyAroundWorkflows from './articles/designing-school-technology-around-workflows';
+import whatWeLearnedFromBuildingTechProducts from './articles/what-we-learned-from-building-tech-products';
 
 export type { Insight, InsightCategory } from './types';
 
 export const insights: Insight[] = [
   whatAbeTechlabBuilds,
+  howWeApproachProductStrategy,
   whyProductResearchComesBeforeBuilding,
+  whatToValidateBeforeBuildingAnMvp,
   teachingTechnologyIsMoreThanAnLms,
+  designingSchoolTechnologyAroundWorkflows,
+  buildingForAfricanMarketsStartsWithContext,
   fromConstructionProblemToProcurementPlatform,
   productMarketingStartsBeforeLaunch,
+  whatWeLearnedFromBuildingTechProducts,
 ];
 
 export function getInsight(slug: string) {
