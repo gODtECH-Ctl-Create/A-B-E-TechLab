@@ -23,6 +23,10 @@ export default function MobileContactForm() {
       setDetailsError('Please complete your name, email and project description before continuing.');
       return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(details.email.trim())) {
+      setDetailsError('Please enter a valid email address before continuing.');
+      return;
+    }
     setStep(3);
   }
 
