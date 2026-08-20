@@ -35,26 +35,26 @@ export function StudioVisual() {
 
       {nodes.map((node) => (
         <div key={node.label} className="absolute" style={{ left: node.x, top: node.y }}>
-          <div className="flex items-center gap-2 border border-white/20 bg-white/[.06] px-3 py-2 text-[10px] font-semibold tracking-[.18em] text-white/70 backdrop-blur-md">
+          <div className="flex items-center gap-2 border border-white/20 bg-white/[.06] px-2.5 py-1.5 text-[9px] font-semibold tracking-[.16em] text-white/70 backdrop-blur-md sm:px-3 sm:py-2 sm:text-[10px] sm:tracking-[.18em]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#b7ff3c]" />
             {node.label}
           </div>
         </div>
       ))}
 
-      <div className="absolute left-1/2 top-1/2 flex h-48 w-48 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-white/20 bg-white/[.06] backdrop-blur-xl md:h-56 md:w-56">
+      <div className="absolute left-1/2 top-1/2 flex h-40 w-40 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-white/20 bg-white/[.06] backdrop-blur-xl sm:h-48 sm:w-48 md:h-56 md:w-56">
         <div className="text-center">
-          <div className="font-display text-6xl font-bold tracking-[-.09em] md:text-7xl">ABE</div>
-          <div className="mt-1 text-[9px] font-semibold uppercase tracking-[.3em] text-[#b7ff3c]">TECHLAB</div>
+          <div className="font-display text-5xl font-bold tracking-[-.09em] sm:text-6xl md:text-7xl">ABE</div>
+          <div className="mt-1 text-[8px] font-semibold uppercase tracking-[.28em] text-[#b7ff3c] sm:text-[9px] sm:tracking-[.3em]">TECHLAB</div>
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-6 sm:left-6 sm:right-6">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[.2em] text-white/40">Product & technology studio</p>
-          <p className="mt-2 max-w-xs text-sm leading-6 text-white/70">We build products and technology for people who learn, teach, work and build.</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[.18em] text-white/40 sm:text-[10px] sm:tracking-[.2em]">Product & technology studio</p>
+          <p className="mt-2 max-w-xs text-xs leading-5 text-white/70 sm:text-sm sm:leading-6">We build products and technology for people who learn, teach, work and build.</p>
         </div>
-        <Sparkles className="mb-1 text-[#b7ff3c]" size={20} />
+        <Sparkles className="mb-1 shrink-0 text-[#b7ff3c]" size={18} />
       </div>
     </div>
   );
@@ -73,11 +73,11 @@ export function ProjectVisual({ name, category, index }: { name: string; categor
         <div className="absolute inset-0" style={{ background: `radial-gradient(circle at 75% 20%, ${accent}55, transparent 38%), #151513` }} />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-black/35" />
-      <div className="absolute left-7 right-7 top-7 text-[10px] font-semibold uppercase tracking-[.2em] text-white/70">{category}</div>
-      <div className="absolute bottom-20 left-7 right-7"><div className="font-display text-4xl font-semibold tracking-[-.06em] md:text-5xl">{name}</div></div>
-      <div className="absolute bottom-6 left-7 right-7 flex items-center justify-between border-t border-white/20 pt-4 text-xs text-white/65">
+      <div className="absolute left-5 right-5 top-5 text-[9px] font-semibold uppercase tracking-[.18em] text-white/70 sm:left-7 sm:right-7 sm:top-7 sm:text-[10px] sm:tracking-[.2em]">{category}</div>
+      <div className="absolute bottom-20 left-5 right-5 sm:left-7 sm:right-7"><div className="font-display text-3xl font-semibold tracking-[-.06em] sm:text-4xl md:text-5xl">{name}</div></div>
+      <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between border-t border-white/20 pt-3 text-[11px] text-white/65 sm:bottom-6 sm:left-7 sm:right-7 sm:pt-4 sm:text-xs">
         <span>Explore project</span>
-        <ArrowUpRight className="transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" size={18} />
+        <ArrowUpRight className="transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" size={17} />
       </div>
     </Link>
   );
