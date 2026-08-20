@@ -1,6 +1,38 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getInsight, insights } from '@/lib/insights';
+import { absoluteUrl } from '@/lib/site';
+
 export function generateStaticParams(){return insights.map(i=>({slug:i.slug}))}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const i=getInsight(slug);return i?{title:i.title,description:i.excerpt,openGraph:{title:i.title,description:i.excerpt,type:'article'}}:{}}
-export default async function InsightPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const i=getInsight(slug);if(!i)notFound();return <article className="min-h-screen bg-[#f5f5f2]"><header className="container max-w-4xl pb-14 pt-20 md:pt-28"><Link href="/insights" className="text-xs font-semibold uppercase tracking-[.18em] text-black/40 hover:text-black">← All insights</Link><p className="mt-12 text-xs font-semibold uppercase tracking-[.18em] text-black/40">{i.category} · {i.readTime}</p><h1 className="font-display mt-5 text-5xl font-semibold leading-[.95] tracking-[-.06em] md:text-7xl">{i.title}</h1><p className="mt-7 max-w-2xl text-xl leading-8 text-black/60">{i.excerpt}</p><p className="mt-6 text-xs text-black/35">Published August 16, 2026 · ABE TechLab</p></header><main className="border-t border-black/10"><div className="container max-w-3xl py-14 md:py-20">{i.content.map((p,n)=><p key={n} className="mb-7 text-lg leading-9 text-black/70">{p}</p>)}<div className="mt-16 border-t border-black/10 pt-8"><Link href="/contact" className="btn-primary inline-flex px-6 py-4 font-semibold">Talk to ABE TechLab →</Link></div></div></main></article>}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params;
+  const i=getInsight(slug);
+  if(!i)return{};
+  const url=absoluteUrl(`/insights/${i.slug}`);
+  return {
+    title:i.title,
+    description:i.excerpt,
+    alternates:{canonical:url},
+    openGraph:{title:i.title,description:i.excerpt,type:'article',url,publishedTime:i.publishedAt,authors:['ABE TechLab'],section:i.category},
+  };
+}
+
+export default async function InsightPage({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params;
+  const i=getInsight(slug);
+  if(!i)notFound();
+  const url=absoluteUrl(`/insights/${i.slug}`);
+  const articleStructuredData={
+    '@context':'https://schema.org',
+    '@type':'Article',
+    headline:i.title,
+    description:i.excerpt,
+    datePublished:i.publishedAt,
+    dateModified:i.publishedAt,
+    mainEntityOfPage:{'@type':'WebPage','@id':url},
+    author:{'@type':'Organization','name':'ABE TechLab','url':absoluteUrl('/')},
+    publisher:{'@type':'Organization','name':'ABE TechLab','url':absoluteUrl('/')},
+    articleSection:i.category,
+  };
+  return <article className="min-h-screen bg-[#f5f5f2]"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(articleStructuredData)}}/><header className="container max-w-4xl pb-14 pt-20 md:pt-28"><Link href="/insights" className="text-xs font-semibold uppercase tracking-[.18em] text-black/40 hover:text-black">← All insights</Link><p className="mt-12 text-xs font-semibold uppercase tracking-[.18em] text-black/40">{i.category} · {i.readTime}</p><h1 className="font-display mt-5 text-5xl font-semibold leading-[.95] tracking-[-.06em] md:text-7xl">{i.title}</h1><p className="mt-7 max-w-2xl text-xl leading-8 text-black/60">{i.excerpt}</p><p className="mt-6 text-xs text-black/35">Published August 16, 2026 · ABE TechLab</p></header><main className="border-t border-black/10"><div className="container max-w-3xl py-14 md:py-20">{i.content.map((p,n)=><p key={n} className="mb-7 text-lg leading-9 text-black/70">{p}</p>)}<div className="mt-16 border-t border-black/10 pt-8"><Link href="/contact" className="btn-primary inline-flex px-6 py-4 font-semibold">Talk to ABE TechLab →</Link></div></div></main></article>}
