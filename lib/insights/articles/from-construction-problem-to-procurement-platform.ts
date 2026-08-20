@@ -1,0 +1,13 @@
+import type { Insight } from '../types';
+const article: Insight = {
+  slug: 'from-construction-problem-to-procurement-platform', title: 'From a Construction Problem to a Procurement Platform', excerpt: 'How product thinking can turn a fragmented construction procurement experience into a clearer digital marketplace.', category: 'Technology', publishedAt: '2026-08-16', readTime: '6 min read', author: 'ABE TechLab', relatedSlugs: ['how-we-approach-product-strategy', 'what-we-learned-from-building-tech-products'], relatedPaths: ['/products', '/services', '/contact'],
+  content: [
+    'Construction procurement involves more than finding a product. People need to know what is available, who supplies it, what it costs, whether the specification is right, how to make contact and what happens after the first conversation. When those pieces are fragmented, the search itself becomes part of the problem.',
+    'BuMarS is a construction ecosystem, and PROQUREMENT is the builders marketplace being developed within it. The product direction starts with a simple idea: make discovery of building materials and relevant suppliers easier and more structured.',
+    'That sounds like a marketplace problem, but the product challenge is broader. A catalogue alone does not create trust. Users need useful categorisation, understandable information and a straightforward path from discovery to action. Suppliers also need a way to present what they actually offer without being buried inside an undifferentiated directory.',
+    'This is where product thinking becomes important. Instead of beginning with every possible marketplace feature, the team can ask what the smallest useful transaction looks like. What information does a buyer need before making contact? What information does a seller need to provide? Which parts can be simplified or handled outside the platform in an early phase?',
+    'A construction product also has to respect the context in which people already work. Phone calls, messaging, relationships and local knowledge may remain important even when software improves discovery. The goal is not to replace every existing behaviour. The goal is to remove unnecessary friction around it.',
+    'That makes a procurement platform an interesting product problem: the value comes from better coordination as much as better screens. Discovery, trust, categorisation and action have to connect.',
+    'The lesson extends beyond construction. Whenever a market is fragmented, a useful digital product can start by making the information and next step clearer. The strongest marketplace experiences often begin there, before they become large ecosystems.'
+  ],
+}; export default article;
