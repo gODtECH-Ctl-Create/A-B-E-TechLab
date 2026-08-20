@@ -118,4 +118,10 @@ button,input,textarea,select { font:inherit; }
   .desktop-only-scan { display:block; }
 }
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.reveal-delay{animation:none}.studio-visual::after{animation:none}.trusted-marquee{animation-duration:60s;-webkit-animation-duration:60s}.project-visual,.process-item{transition:none}.site-loading-ring-one,.site-loading-ring-two,.site-loading-logo{animation:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.reveal-delay,.studio-visual::after,.trusted-marquee{animation:none !important}
+  .project-visual,.process-item,.mobile-choice,.btn-primary,.btn-secondary{transition:none !important}
+  .btn-primary:hover,.btn-secondary:hover,.mobile-choice:active{transform:none}
+  .site-loading-ring-one,.site-loading-ring-two,.site-loading-logo{animation:none !important}
+}
