@@ -44,32 +44,10 @@ export const metadata: Metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": absoluteUrl("#organization"),
-      name: siteName,
-      url: siteUrl,
-      email: siteEmail,
-      description: "Product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.",
-      founder: { "@id": absoluteUrl("#founder") },
-      areaServed: "Worldwide",
-      knowsAbout: ["Product research", "Product strategy", "Product marketing", "Product design", "Software development", "Education technology", "Teaching technology"],
-    },
-    {
-      "@type": "Person",
-      "@id": absoluteUrl("#founder"),
-      name: "Ayo Richard ABE",
-      worksFor: { "@id": absoluteUrl("#organization") },
-    },
-    {
-      "@type": "WebSite",
-      "@id": absoluteUrl("#website"),
-      name: siteName,
-      url: siteUrl,
-      publisher: { "@id": absoluteUrl("#organization") },
-      inLanguage: "en-NG",
-    },
-  ],
+    {"@type":"Organization","@id":absoluteUrl("#organization"),name:siteName,url:siteUrl,email:siteEmail,description:"Product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.",founder:{"@id":absoluteUrl("#founder")},areaServed:"Worldwide",knowsAbout:["Product research","Product strategy","Product marketing","Product design","Software development","Education technology","Teaching technology"]},
+    {"@type":"Person","@id":absoluteUrl("#founder"),name:"Ayo Richard ABE",worksFor:{"@id":absoluteUrl("#organization")}},
+    {"@type":"WebSite","@id":absoluteUrl("#website"),name:siteName,url:siteUrl,publisher:{"@id":absoluteUrl("#organization")},inLanguage:"en-NG"}
+  ]
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
