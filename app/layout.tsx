@@ -3,8 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import AmbientPiano from "@/components/AmbientPiano";
-
-const siteUrl = "https://a-b-e-tech-lab.vercel.app";
+import { absoluteUrl, siteEmail, siteName, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -13,10 +12,10 @@ export const metadata: Metadata = {
     template: "%s | ABE TechLab",
   },
   description: "ABE TechLab is a product and technology studio working across product research, strategy, product marketing, design, development, education technology and teaching technology.",
-  applicationName: "ABE TechLab",
-  authors: [{ name: "ABE TechLab" }],
-  creator: "ABE TechLab",
-  publisher: "ABE TechLab",
+  applicationName: siteName,
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
   category: "technology",
   keywords: [
     "ABE TechLab", "product strategy", "product research", "market research", "product marketing", "product positioning", "product design", "product development", "education technology", "teaching technology", "learning platforms", "construction technology", "digital products", "technology studio"
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
     title: "ABE TechLab | Product, Research, Education & Technology",
     description: "We research, shape, design, build and position digital products, including technology for learning and teaching.",
     type: "website",
-    siteName: "ABE TechLab",
+    siteName,
     url: siteUrl,
     locale: "en_NG",
   },
@@ -34,6 +33,7 @@ export const metadata: Metadata = {
     title: "ABE TechLab | Product, Research, Education & Technology",
     description: "Product research, strategy, marketing, design, development and teaching technology.",
   },
+  alternates: { canonical: siteUrl },
   robots: {
     index: true,
     follow: true,
@@ -43,14 +43,33 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "ABE TechLab",
-  url: siteUrl,
-  email: "abeayo6@gmail.com",
-  description: "Product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.",
-  founder: { "@type": "Person", name: "Ayo Richard ABE" },
-  areaServed: "Worldwide",
-  knowsAbout: ["Product research", "Product strategy", "Product marketing", "Product design", "Software development", "Education technology", "Teaching technology"],
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": absoluteUrl("#organization"),
+      name: siteName,
+      url: siteUrl,
+      email: siteEmail,
+      description: "Product and technology studio working across research, strategy, product marketing, design, development, education technology and teaching technology.",
+      founder: { "@id": absoluteUrl("#founder") },
+      areaServed: "Worldwide",
+      knowsAbout: ["Product research", "Product strategy", "Product marketing", "Product design", "Software development", "Education technology", "Teaching technology"],
+    },
+    {
+      "@type": "Person",
+      "@id": absoluteUrl("#founder"),
+      name: "Ayo Richard ABE",
+      worksFor: { "@id": absoluteUrl("#organization") },
+    },
+    {
+      "@type": "WebSite",
+      "@id": absoluteUrl("#website"),
+      name: siteName,
+      url: siteUrl,
+      publisher: { "@id": absoluteUrl("#organization") },
+      inLanguage: "en-NG",
+    },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
