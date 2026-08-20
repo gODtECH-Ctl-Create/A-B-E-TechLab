@@ -1,0 +1,24 @@
+import type { Insight } from '../types';
+
+const article: Insight = {
+  slug: 'teaching-technology-is-more-than-an-lms',
+  title: 'Teaching Technology Is More Than an LMS',
+  excerpt: 'Technology for education should support the people doing the teaching, not only the platform where lessons are stored.',
+  category: 'Perspectives',
+  publishedAt: '2026-08-16',
+  readTime: '6 min read',
+  author: 'ABE TechLab',
+  relatedSlugs: ['what-abe-techlab-builds', 'from-construction-problem-to-procurement-platform'],
+  relatedPaths: ['/programs', '/products'],
+  content: [
+    'An LMS, or Learning Management System, can organise courses, lessons, assessments and records. That is useful, but teaching technology has a wider job: helping the people inside the learning system teach, learn, monitor progress and respond to problems.',
+    'A student may interact with the course interface, but a teacher may be working across lesson planning, attendance, assessment, feedback, communication and progress monitoring at the same time. A school administrator may care about enrolment, reporting, payments, staff workflows and parent communication. A useful education product has to account for those connected realities.',
+    'This changes how we think about product design. The question is not only whether a student can complete a lesson. It is also whether the teacher can understand what happened next. Can they see where learners are struggling? Can they adapt the pace? Can they communicate feedback without creating another disconnected process?',
+    'The same applies to institutions. A platform that is pleasant for students but difficult for administrators can create operational work that erases the benefits. Likewise, a system that collects a lot of information without making that information useful can add reporting without improving decisions.',
+    'Teaching technology should therefore be designed around workflows, not just screens. Sometimes the best feature is a simple view that turns scattered information into one understandable decision. Sometimes it is an offline-friendly workflow, a clearer communication channel or a smaller number of steps for a routine task.',
+    'TechTrack is one part of ABE TechLab’s exploration of this space. The broader lesson is that education products need to respect the full learning system: students, teachers, institutions and the people supporting them.',
+    'When technology is designed around that whole system, the product can become more than a place to store lessons. It can become infrastructure that helps teaching work better.'
+  ],
+};
+
+export default article;
