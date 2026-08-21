@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import AmbientPiano from "@/components/AmbientPiano";
+import { PageTransition } from "@/components/PageTransition";
 import { absoluteUrl, siteEmail, siteName, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <PageTransition />
         <Header />
         <main>{children}</main>
         <Footer />
