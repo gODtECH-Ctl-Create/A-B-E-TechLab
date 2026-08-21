@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const MIN_DISPLAY_MS = 280;
+const MAX_DISPLAY_MS = 1400;
 
 export function PageTransition() {
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export function PageTransition() {
     const elapsed = Date.now() - startedAt.current;
     const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
 
+    if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       setVisible(false);
       startedAt.current = 0;
@@ -45,6 +47,11 @@ export function PageTransition() {
       startedAt.current = Date.now();
       if (timer.current) clearTimeout(timer.current);
       setVisible(true);
+
+      timer.current = setTimeout(() => {
+        setVisible(false);
+        startedAt.current = 0;
+      }, MAX_DISPLAY_MS);
     };
 
     document.addEventListener("click", handleClick, true);
