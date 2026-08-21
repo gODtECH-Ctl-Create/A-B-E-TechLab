@@ -105,7 +105,8 @@ export default function MobileContactForm() {
         <div className="py-8 text-center" role="status" aria-live="polite">
           <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-black text-white"><Check size={24} aria-hidden="true"/></div>
           <h2 className="font-display mt-6 text-3xl font-semibold tracking-[-.045em]">Thanks. We have it.</h2>
-          <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-black/55">Your enquiry has been sent. We’ll get back to you soon.</p>
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-black/55">Your enquiry has been sent. We’ll get back to you in a jiffy.</p>
+          <p className="mx-auto mt-2 max-w-sm text-xs leading-5 text-black/40">A confirmation email is on its way to your inbox.</p>
         </div>
       )}
     </form>
