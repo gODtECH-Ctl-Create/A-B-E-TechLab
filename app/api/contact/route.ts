@@ -3,6 +3,59 @@ import { NextResponse } from 'next/server';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE_LENGTH = 5000;
 
+async function sendConfirmationEmail({
+  name,
+  email,
+  need,
+  timeline,
+}: {
+  name: string;
+  email: string;
+  need: string;
+  timeline: string;
+}) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM_EMAIL;
+
+  if (!apiKey || !from) {
+    console.warn('RESEND_API_KEY or RESEND_FROM_EMAIL is not configured; skipping visitor confirmation email.');
+    return;
+  }
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: 'Thank you for contacting ABE TechLab',
+      text: `Hi ${name},\n\nThank you for contacting ABE TechLab. We’ve received your enquiry and will get back to you in a jiffy.\n\nWhat you contacted us about: ${need}\nTimeline: ${timeline || 'Not specified'}\n\nWe appreciate you reaching out and look forward to learning more about what you’re building.\n\nABE TechLab`,
+      html: `
+        <div style="font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:#15171a;max-width:600px;margin:0 auto;padding:32px 20px">
+          <div style="display:inline-flex;align-items:center;background:#11110f;color:#b7ff3c;padding:10px 14px;font-weight:800;letter-spacing:.08em">ABE</div>
+          <p style="margin-top:32px">Hi ${name},</p>
+          <h1 style="font-size:28px;line-height:1.15;margin:0 0 16px">Thank you for contacting ABE TechLab.</h1>
+          <p>We’ve received your enquiry and will get back to you in a jiffy.</p>
+          <div style="margin:24px 0;padding:18px;background:#f4f5f7;border:1px solid #e1e4e8">
+            <strong>Your enquiry</strong>
+            <p style="margin:10px 0 0"><b>Area:</b> ${need}<br/><b>Timeline:</b> ${timeline || 'Not specified'}</p>
+          </div>
+          <p>We appreciate you reaching out and look forward to learning more about what you’re building.</p>
+          <p style="margin-top:28px"><b>ABE TechLab</b><br/>Product · Research · Education · Technology</p>
+        </div>
+      `,
+    }),
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    console.error('Visitor confirmation email failed:', await response.text());
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -47,6 +100,8 @@ export async function POST(request: Request) {
       console.error('Google Apps Script rejected submission:', result.error);
       return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
     }
+
+    await sendConfirmationEmail({ name, email, need, timeline });
 
     return NextResponse.json({ ok: true });
   } catch (error) {
