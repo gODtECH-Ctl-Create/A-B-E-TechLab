@@ -36,9 +36,17 @@ function Organization({ name, descriptor, logo }: Organization) {
   );
 }
 
-export default function TrustedBy() {
-  const repeated = [...organizations, ...organizations];
+function OrganizationGroup() {
+  return (
+    <div className="trusted-marquee-group flex shrink-0" aria-hidden="true">
+      {organizations.map((organization) => (
+        <Organization key={organization.name} {...organization} />
+      ))}
+    </div>
+  );
+}
 
+export default function TrustedBy() {
   return (
     <section aria-label="Trusted by organisations" className="overflow-hidden border-b border-black/10 bg-white/60 py-10">
       <div className="container">
@@ -46,9 +54,8 @@ export default function TrustedBy() {
       </div>
       <div className="relative w-full overflow-hidden">
         <div className="trusted-marquee" aria-hidden="true">
-          {repeated.map((organization, index) => (
-            <Organization key={`${organization.name}-${index}`} {...organization} />
-          ))}
+          <OrganizationGroup />
+          <OrganizationGroup />
         </div>
       </div>
     </section>
