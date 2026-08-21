@@ -1,0 +1,70 @@
+/* Final ABE TechLab responsive + visual polish layer. */
+
+/* Prevent long labels, URLs and controls from breaking layouts. */
+*, *::before, *::after { min-width: 0; }
+h1, h2, h3, h4, p, a, button, label, span, td, th { overflow-wrap: anywhere; }
+
+/* A consistent interaction language. Lemon green is a signal, never a full-page surface. */
+a, button, [role="button"] { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--accent-border);
+  outline-offset: 3px;
+}
+button:not(:disabled), a { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+
+/* Keep the brand accent visible in small, intentional places. */
+.accent-rule { width: 42px; height: 3px; border-radius: 999px; background: var(--accent); }
+.accent-chip { display:inline-flex; align-items:center; gap:.45rem; padding:.35rem .6rem; border:1px solid var(--accent-border); background:var(--accent-soft); border-radius:999px; font-size:.72rem; font-weight:700; letter-spacing:.04em; }
+
+/* Buttons feel tactile without becoming noisy. */
+.btn-primary, .btn-secondary { min-height: 48px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease; }
+.btn-primary:hover, .btn-secondary:hover { box-shadow: 0 10px 24px rgba(17,17,15,.10); }
+.btn-primary:active, .btn-secondary:active { transform: translateY(0) scale(.985); }
+
+/* Cards and interactive surfaces. */
+.service-card, .project-visual, .studio-visual { overflow: hidden; }
+.service-card, .project-visual { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.service-card:hover, .project-visual:hover { box-shadow: 0 18px 40px rgba(17,17,15,.08); }
+
+/* Tablet: preserve breathing room while avoiding cramped two-column layouts. */
+@media (max-width: 1023px) {
+  .container { width: min(100% - 32px, 1180px); }
+  .hero-shell > .container { padding-top: 3.5rem; padding-bottom: 4rem; }
+  .hero-shell > .container > .grid { grid-template-columns: minmax(0,1fr); }
+  .studio-visual { min-height: 430px; }
+  .trusted-marquee { animation-duration: 25s; }
+}
+
+/* Mobile: make the entire experience deliberate and touch-friendly. */
+@media (max-width: 700px) {
+  .container { width: min(100% - 28px, 1180px); }
+  section { scroll-margin-top: 84px; }
+  .hero-shell > .container { padding-top: 2.5rem; padding-bottom: 3rem; }
+  .hero-shell h1 { max-width: 10ch; }
+  .studio-visual { min-height: 340px !important; }
+
+  .btn-primary, .btn-secondary { width: 100%; min-height: 52px; }
+  .btn-primary + .btn-secondary, .btn-secondary + .btn-primary { margin-top: .65rem; }
+
+  .service-card, .project-visual { border-radius: 18px; }
+  .service-card:hover, .project-visual:hover { transform: none; box-shadow: 0 10px 26px rgba(17,17,15,.06); }
+  .process-item:hover { padding-left: 0; }
+
+  /* Never let a marquee create horizontal page scroll. */
+  .trusted-marquee { max-width: none; }
+
+  .site-loading, .page-transition { padding-inline: 18px; }
+  .page-transition-copy span, .site-loading-copy span { max-width: 30ch; margin-inline: auto; line-height: 1.5; }
+}
+
+/* Reduced-motion users still get the visual structure without animation. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
