@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const MIN_DISPLAY_MS = 280;
-const MAX_DISPLAY_MS = 1400;
+const MIN_DISPLAY_MS = 320;
+const MAX_DISPLAY_MS = 1800;
 
 export function PageTransition() {
   const pathname = usePathname();
@@ -62,6 +62,8 @@ export function PageTransition() {
     <div
       className={`page-transition${visible ? " is-visible" : ""}`}
       aria-hidden={!visible}
+      aria-live="polite"
+      role="status"
     >
       <div className="page-transition-mark" aria-hidden="true">
         <span className="page-transition-ring page-transition-ring-one" />
