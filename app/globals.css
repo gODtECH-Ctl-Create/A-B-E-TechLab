@@ -23,6 +23,18 @@ button,input,textarea,select { font:inherit; }
 .site-loading-copy strong { font-family:'Space Grotesk',Arial,sans-serif; font-size:16px; letter-spacing:-.02em; }
 .site-loading-copy span { color:var(--muted); font-size:12px; }
 
+.page-transition { position:fixed; z-index:9999; inset:0; display:grid; place-items:center; align-content:center; gap:14px; padding:28px 20px; background:rgba(245,245,242,.97); color:var(--ink); text-align:center; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(5px); transition:opacity .14s ease,transform .14s ease,visibility 0s linear .14s; }
+.page-transition.is-visible { opacity:1; visibility:visible; transform:none; transition:opacity .14s ease,transform .14s ease,visibility 0s; }
+.page-transition-mark { position:relative; width:92px; height:92px; display:grid; place-items:center; }
+.page-transition-ring { position:absolute; inset:0; border:1px solid rgba(17,17,15,.14); border-radius:25px; }
+.page-transition-ring-one { transform:rotate(8deg) scale(.9); animation:page-transition-ring-one 1.1s ease-in-out infinite; }
+.page-transition-ring-two { inset:8px; border-color:rgba(183,255,60,.8); border-radius:19px; transform:rotate(-12deg); animation:page-transition-ring-two 1.1s ease-in-out infinite; }
+.page-transition-logo { position:relative; z-index:1; width:58px; height:58px; display:grid; place-items:center; border-radius:17px; background:var(--ink); box-shadow:0 14px 34px rgba(17,17,15,.16); animation:page-transition-logo 1.1s ease-in-out infinite; }
+.page-transition-logo img { display:block; width:44px; height:44px; }
+.page-transition-copy { display:grid; gap:3px; }
+.page-transition-copy strong { font-family:'Space Grotesk',Arial,sans-serif; font-size:15px; letter-spacing:-.02em; }
+.page-transition-copy span { color:var(--muted); font-size:11px; }
+
 .hero-shell { position:relative; isolation:isolate; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); overflow:hidden; background:var(--bg); }
 .hero-shell::before { content:""; position:absolute; z-index:-2; inset:0; background:radial-gradient(circle at 85% 20%,rgba(183,255,60,.12),transparent 24%),linear-gradient(135deg,#f7f7f3 0%,#eeeeea 100%); pointer-events:none; }
 .hero-shell::after { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(255,255,255,.12),transparent 18%,transparent 82%,rgba(183,255,60,.05)); pointer-events:none; }
@@ -61,6 +73,9 @@ button,input,textarea,select { font:inherit; }
 @keyframes site-loader-ring-one { 0%,100%{transform:rotate(8deg) scale(.92);opacity:.55} 50%{transform:rotate(188deg) scale(1);opacity:1} }
 @keyframes site-loader-ring-two { 0%,100%{transform:rotate(-14deg) scale(.96);opacity:.6} 50%{transform:rotate(166deg) scale(.9);opacity:1} }
 @keyframes site-loader-logo { 0%,100%{transform:translateY(2px) scale(.97)} 50%{transform:translateY(-3px) scale(1)} }
+@keyframes page-transition-ring-one { 0%,100%{transform:rotate(8deg) scale(.9);opacity:.55} 50%{transform:rotate(188deg) scale(1);opacity:1} }
+@keyframes page-transition-ring-two { 0%,100%{transform:rotate(-12deg) scale(.96);opacity:.65} 50%{transform:rotate(168deg) scale(.9);opacity:1} }
+@keyframes page-transition-logo { 0%,100%{transform:translateY(1px) scale(.96)} 50%{transform:translateY(-2px) scale(1)} }
 @keyframes reveal { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 @keyframes shine { 0%,60%,100%{transform:translateX(-100%)} 78%{transform:translateX(100%)} }
 @-webkit-keyframes trusted-scroll { from{transform:translate3d(0,0,0)} to{transform:translate3d(-50%,0,0)} }
@@ -78,6 +93,9 @@ button,input,textarea,select { font:inherit; }
   .site-loading-mark{width:92px;height:92px}
   .site-loading-logo{width:62px;height:62px;font-size:15px}
   .site-loading-ring-two{inset:8px}
+  .page-transition-mark{width:84px;height:84px}
+  .page-transition-logo{width:54px;height:54px}
+  .page-transition-logo img{width:41px;height:41px}
 
   .hero-shell > .container { padding-top:2.75rem; padding-bottom:3rem; }
   .hero-shell > .container > .grid { gap:2rem; }
@@ -123,5 +141,5 @@ button,input,textarea,select { font:inherit; }
   .reveal,.reveal-delay,.studio-visual::after,.trusted-marquee{animation:none !important}
   .project-visual,.process-item,.mobile-choice,.btn-primary,.btn-secondary{transition:none !important}
   .btn-primary:hover,.btn-secondary:hover,.mobile-choice:active{transform:none}
-  .site-loading-ring-one,.site-loading-ring-two,.site-loading-logo{animation:none !important}
+  .site-loading-ring-one,.site-loading-ring-two,.site-loading-logo,.page-transition-ring-one,.page-transition-ring-two,.page-transition-logo{animation:none !important}
 }
