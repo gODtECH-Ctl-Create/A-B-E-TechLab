@@ -69,8 +69,12 @@ button,input,textarea,select { font:inherit; }
 .studio-visual { isolation:isolate; }
 .studio-visual::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.04) 50%,transparent 80%); transform:translateX(-100%); animation:shine 5s 1.2s ease-in-out infinite; }
 .cta-section::before { content:"ABE"; position:absolute; right:-.04em; bottom:-.22em; font-family:'Space Grotesk',sans-serif; font-size:clamp(12rem,30vw,30rem); font-weight:700; line-height:.7; letter-spacing:-.1em; color:rgba(17,17,15,.055); pointer-events:none; }
-.trusted-marquee { display:flex; width:max-content; min-width:max-content; will-change:transform; animation:trusted-scroll 24s linear infinite; -webkit-animation:trusted-scroll 24s linear infinite; }
-.trusted-marquee:hover { animation-play-state:paused; -webkit-animation-play-state:paused; }
+
+/* Trusted By: two identical tracks create a genuinely seamless marquee loop. */
+.trusted-marquee { display:flex; width:max-content; min-width:max-content; will-change:transform; transform:translate3d(0,0,0); animation:trusted-scroll 22s linear infinite; -webkit-animation:trusted-scroll 22s linear infinite; }
+.trusted-marquee-group { display:flex; width:max-content; min-width:max-content; flex:none; }
+.trusted-marquee:hover { animation-play-state:running; -webkit-animation-play-state:running; }
+
 .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.75rem; background:#11110f !important; color:#fff !important; border:1px solid #11110f !important; }
 .btn-primary:hover { color:#fff !important; transform:translateY(-2px); }
 .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.75rem; background:rgba(255,255,255,.5) !important; color:#11110f !important; border:1px solid rgba(17,17,15,.18) !important; }
@@ -135,27 +139,13 @@ button,input,textarea,select { font:inherit; }
   .process-item:hover { padding-left:0; }
 
   .mobile-only-scan { display:block; }
-  .desktop-only-scan { display:none !important; }
-  .mobile-contact-form { display:block; }
-  .cta-section > .container { padding-block:4.5rem; }
-  .cta-section h2 { font-size:clamp(2.8rem,12.8vw,4.5rem); }
-  .cta-section .btn-primary { width:100%; min-height:54px; }
-
-  [class*='py-24'] { padding-top:4rem; padding-bottom:4rem; }
-  [class*='py-28'] { padding-top:4.5rem; padding-bottom:4.5rem; }
-  [class*='py-32'] { padding-top:5rem; padding-bottom:5rem; }
-  [class*='py-36'] { padding-top:5.5rem; padding-bottom:5.5rem; }
-}
-
-@media (min-width:701px){
-  .mobile-only-scan { display:none !important; }
-  .desktop-only-scan { display:block; }
+  .desktop-only-scan { display:none; }
 }
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal,.reveal-delay,.studio-visual::after,.trusted-marquee{animation:none !important}
-  .project-visual,.process-item,.mobile-choice,.btn-primary,.btn-secondary,.site-nav-link,.mobile-nav-link{transition:none !important}
-  .btn-primary:hover,.btn-secondary:hover,.mobile-choice:active{transform:none}
-  .site-loading-ring-one,.site-loading-ring-two,.site-loading-logo,.page-transition-ring-one,.page-transition-ring-two,.page-transition-logo{animation:none !important}
+  .reveal,.reveal-delay,.studio-visual::after{animation:none}
+  /* Keep the marquee visibly alive while remaining much gentler for reduced-motion users. */
+  .trusted-marquee{animation-duration:60s;-webkit-animation-duration:60s}
+  .project-visual,.process-item{transition:none}
 }
