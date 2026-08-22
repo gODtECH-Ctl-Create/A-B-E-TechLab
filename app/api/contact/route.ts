@@ -33,27 +33,12 @@ async function sendConfirmationEmail({
       to: [email],
       subject: 'Thank you for contacting ABE TechLab',
       text: `Hi ${name},\n\nThank you for contacting ABE TechLab. We’ve received your enquiry and will get back to you in a jiffy.\n\nWhat you contacted us about: ${need}\nTimeline: ${timeline || 'Not specified'}\n\nWe appreciate you reaching out and look forward to learning more about what you’re building.\n\nABE TechLab`,
-      html: `
-        <div style="font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:#15171a;max-width:600px;margin:0 auto;padding:32px 20px">
-          <div style="display:inline-flex;align-items:center;background:#11110f;color:#b7ff3c;padding:10px 14px;font-weight:800;letter-spacing:.08em">ABE</div>
-          <p style="margin-top:32px">Hi ${name},</p>
-          <h1 style="font-size:28px;line-height:1.15;margin:0 0 16px">Thank you for contacting ABE TechLab.</h1>
-          <p>We’ve received your enquiry and will get back to you in a jiffy.</p>
-          <div style="margin:24px 0;padding:18px;background:#f4f5f7;border:1px solid #e1e4e8">
-            <strong>Your enquiry</strong>
-            <p style="margin:10px 0 0"><b>Area:</b> ${need}<br/><b>Timeline:</b> ${timeline || 'Not specified'}</p>
-          </div>
-          <p>We appreciate you reaching out and look forward to learning more about what you’re building.</p>
-          <p style="margin-top:28px"><b>ABE TechLab</b><br/>Product · Research · Education · Technology</p>
-        </div>
-      `,
+      html: `<div style="font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:#15171a;max-width:600px;margin:0 auto;padding:32px 20px"><div style="display:inline-flex;align-items:center;background:#11110f;color:#b7ff3c;padding:10px 14px;font-weight:800;letter-spacing:.08em">ABE</div><p style="margin-top:32px">Hi ${name},</p><h1 style="font-size:28px;line-height:1.15;margin:0 0 16px">Thank you for contacting ABE TechLab.</h1><p>We’ve received your enquiry and will get back to you in a jiffy.</p><div style="margin:24px 0;padding:18px;background:#f4f5f7;border:1px solid #e1e4e8"><strong>Your enquiry</strong><p style="margin:10px 0 0"><b>Area:</b> ${need}<br/><b>Timeline:</b> ${timeline || 'Not specified'}</p></div><p>We appreciate you reaching out and look forward to learning more about what you’re building.</p><p style="margin-top:28px"><b>ABE TechLab</b><br/>Product · Research · Education · Technology</p></div>`,
     }),
     cache: 'no-store',
   });
 
-  if (!response.ok) {
-    console.error('Visitor confirmation email failed:', await response.text());
-  }
+  if (!response.ok) console.error('Visitor confirmation email failed:', await response.text());
 }
 
 async function sendOperationsIntake({
@@ -75,30 +60,43 @@ async function sendOperationsIntake({
   const intakeSecret = process.env.OPERATIONS_INTAKE_SECRET;
 
   if (!intakeUrl || !intakeSecret) {
-    console.warn('OPERATIONS_INTAKE_URL or OPERATIONS_INTAKE_SECRET is not configured; skipping Operations intake.');
-    return;
+    console.error('Operations intake is not configured: OPERATIONS_INTAKE_URL or OPERATIONS_INTAKE_SECRET is missing.');
+    return { ok: false, reason: 'not_configured' as const };
   }
 
-  const response = await fetch(intakeUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-website-intake-secret': intakeSecret,
-    },
-    body: JSON.stringify({
-      intake_id: crypto.randomUUID(),
-      name,
-      email,
-      company,
-      need,
-      timeline,
-      message,
-    }),
-    cache: 'no-store',
-  });
+  const intakeId = crypto.randomUUID();
+  try {
+    const response = await fetch(intakeUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-website-intake-secret': intakeSecret,
+        'x-website-intake-id': intakeId,
+      },
+      body: JSON.stringify({ intake_id: intakeId, name, email, company, need, timeline, message }),
+      cache: 'no-store',
+      signal: AbortSignal.timeout(10000),
+    });
 
-  if (!response.ok) {
-    console.error('Operations website intake failed:', await response.text());
+    const raw = await response.text();
+    let result: { ok?: boolean; error?: string; lead_id?: string; duplicate?: boolean } = {};
+    try { result = raw ? JSON.parse(raw) : {}; } catch { /* keep raw response for diagnostics */ }
+
+    if (!response.ok || result.ok === false) {
+      console.error('Operations website intake rejected:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: result.error ?? raw.slice(0, 500),
+        intakeId,
+      });
+      return { ok: false, reason: 'rejected' as const, status: response.status };
+    }
+
+    console.info('Operations website intake accepted:', { intakeId, leadId: result.lead_id, duplicate: result.duplicate === true });
+    return { ok: true, intakeId, leadId: result.lead_id, duplicate: result.duplicate === true };
+  } catch (error) {
+    console.error('Operations website intake request failed:', { intakeId, error: error instanceof Error ? error.message : String(error) });
+    return { ok: false, reason: 'request_failed' as const };
   }
 }
 
@@ -129,30 +127,25 @@ export async function POST(request: Request) {
       cache: 'no-store',
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Google Apps Script delivery failed:', errorText);
-      return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
-    }
+    if (!response.ok) return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
 
     let result: { ok?: boolean; error?: string } = {};
-    try {
-      result = await response.json();
-    } catch {
-      // Google Apps Script may return a non-JSON response depending on deployment settings.
-    }
+    try { result = await response.json(); } catch { /* non-JSON response accepted */ }
+    if (result.ok === false) return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
 
-    if (result.ok === false) {
-      console.error('Google Apps Script rejected submission:', result.error);
-      return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
-    }
-
-    await Promise.allSettled([
-      sendConfirmationEmail({ name, email, need, timeline }),
+    const [operationsResult] = await Promise.all([
       sendOperationsIntake({ name, email, company, need, timeline, message }),
+      sendConfirmationEmail({ name, email, need, timeline }),
     ]);
 
-    return NextResponse.json({ ok: true });
+    if (!operationsResult.ok) {
+      return NextResponse.json({
+        error: 'Your message reached our email system, but the Operations workspace could not record it yet. Please try again shortly.',
+        code: 'operations_intake_failed',
+      }, { status: 502 });
+    }
+
+    return NextResponse.json({ ok: true, operations: { recorded: true, duplicate: operationsResult.duplicate === true } });
   } catch (error) {
     console.error('Contact submission failed:', error);
     return NextResponse.json({ error: 'Unable to process the enquiry.' }, { status: 500 });
