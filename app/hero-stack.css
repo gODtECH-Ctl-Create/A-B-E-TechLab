@@ -12,9 +12,12 @@
 .hero-visual-layer {
   position: absolute;
   inset: 0;
+  left: 50%;
   z-index: 1;
-  width: 100%;
+  width: 100vw;
+  max-width: 100vw;
   height: 100%;
+  transform: translateX(-50%);
   overflow: hidden;
   pointer-events: none;
 }
