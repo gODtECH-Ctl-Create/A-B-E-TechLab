@@ -56,6 +56,52 @@ async function sendConfirmationEmail({
   }
 }
 
+async function sendOperationsIntake({
+  name,
+  email,
+  company,
+  need,
+  timeline,
+  message,
+}: {
+  name: string;
+  email: string;
+  company: string;
+  need: string;
+  timeline: string;
+  message: string;
+}) {
+  const intakeUrl = process.env.OPERATIONS_INTAKE_URL;
+  const intakeSecret = process.env.OPERATIONS_INTAKE_SECRET;
+
+  if (!intakeUrl || !intakeSecret) {
+    console.warn('OPERATIONS_INTAKE_URL or OPERATIONS_INTAKE_SECRET is not configured; skipping Operations intake.');
+    return;
+  }
+
+  const response = await fetch(intakeUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-website-intake-secret': intakeSecret,
+    },
+    body: JSON.stringify({
+      intake_id: crypto.randomUUID(),
+      name,
+      email,
+      company,
+      need,
+      timeline,
+      message,
+    }),
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    console.error('Operations website intake failed:', await response.text());
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -101,7 +147,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
     }
 
-    await sendConfirmationEmail({ name, email, need, timeline });
+    await Promise.allSettled([
+      sendConfirmationEmail({ name, email, need, timeline }),
+      sendOperationsIntake({ name, email, company, need, timeline, message }),
+    ]);
 
     return NextResponse.json({ ok: true });
   } catch (error) {
