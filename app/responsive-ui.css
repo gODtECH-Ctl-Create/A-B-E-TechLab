@@ -36,6 +36,29 @@ pre, code { max-width: 100%; overflow-x: auto; }
   /* Mobile contact layout. */
   .mobile-only-scan { display: block; }
   .desktop-only-scan { display: none; }
+  .mobile-contact-form { display: block; width: 100%; min-width: 0; }
+  .mobile-only-scan > div { width: 100%; min-width: 0; }
+
+  /* Hero photography is a background layer, but on narrow screens the full frame
+     is more important than edge-to-edge cropping. Keep the whole image visible. */
+  .hero-shell .pointer-events-none img,
+  .relative.overflow-hidden.grid-bg > .pointer-events-none img {
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    background: var(--bg);
+  }
+
+  /* Give hero imagery a little more vertical breathing room on phones. */
+  .hero-shell > .container,
+  .relative.overflow-hidden.grid-bg > .container {
+    min-height: 34rem;
+  }
+
+  /* Keep the hero overlays from becoming too opaque over the now fully visible frame. */
+  .hero-shell .pointer-events-none > div,
+  .relative.overflow-hidden.grid-bg > .pointer-events-none > div {
+    opacity: .82;
+  }
 
   /* Keep the mobile header compact and prevent logo/menu collisions. */
   header .container { width: calc(100% - 28px); }
