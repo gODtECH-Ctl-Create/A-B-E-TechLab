@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./responsive-ui.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import AmbientPiano from "@/components/AmbientPiano";
