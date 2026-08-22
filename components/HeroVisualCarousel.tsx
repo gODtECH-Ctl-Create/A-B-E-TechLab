@@ -21,15 +21,15 @@ export default function HeroVisualCarousel({ visuals, interval = DEFAULT_INTERVA
           key={visual.src}
           src={visual.src}
           alt=""
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.32] md:opacity-[.38]' : 'opacity-0'}`}
+          className={`absolute inset-0 h-full w-full object-contain object-center transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.46] md:opacity-[.48]' : 'opacity-0'}`}
           loading={index === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />
       ))}
-      {/* Keep the visuals clearly present while preserving strong text contrast. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2]/92 via-[#f5f5f2]/82 via-[42%] to-[#f5f5f2]/48" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/94 via-[#f5f5f2]/42 to-[#f5f5f2]/65" />
-      <div className="absolute inset-0 bg-[#11110f]/[.08] mix-blend-multiply" />
+      {/* Keep the full frame visible. These layers provide text contrast without washing out the photography. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f2]/38 via-[#f5f5f2]/12 via-[42%] to-[#f5f5f2]/28" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f2]/34 via-transparent to-[#f5f5f2]/24" />
+      <div className="absolute inset-0 bg-[#11110f]/[.025] mix-blend-multiply" />
     </div>
   );
 }
