@@ -1,21 +1,9 @@
-/* Hero photography fix: preserve the full frame and prevent global img rules from collapsing absolute layers. */
+/* Hero photography fix: preserve the complete image frame without adding a second visual layer. */
 .hero-shell .pointer-events-none img,
 .relative.overflow-hidden.grid-bg > .pointer-events-none img {
   width: 100% !important;
   height: 100% !important;
   max-width: none;
-}
-
-@media (max-width: 700px) {
-  .hero-shell .pointer-events-none img,
-  .relative.overflow-hidden.grid-bg > .pointer-events-none img {
-    object-fit: contain !important;
-    object-position: center center !important;
-    background: var(--bg);
-  }
-
-  .hero-shell .pointer-events-none > div,
-  .relative.overflow-hidden.grid-bg > .pointer-events-none > div {
-    opacity: .58 !important;
-  }
+  object-fit: contain !important;
+  object-position: center center !important;
 }
