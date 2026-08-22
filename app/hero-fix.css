@@ -1,9 +1,0 @@
-/* Hero photography fix: preserve the complete image frame without adding a second visual layer. */
-.hero-shell .pointer-events-none img,
-.relative.overflow-hidden.grid-bg > .pointer-events-none img {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none;
-  object-fit: contain !important;
-  object-position: center center !important;
-}
