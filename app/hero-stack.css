@@ -7,6 +7,8 @@
   overflow: hidden;
 }
 
+.relative.overflow-hidden.grid-bg { background-image: none !important; }
+
 .hero-visual-layer {
   position: absolute;
   inset: 0;
@@ -36,8 +38,8 @@
   height: 100%;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(17,17,15,.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17,17,15,.055) 1px, transparent 1px);
+    linear-gradient(to right, rgba(17,17,15,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,17,15,.045) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -48,11 +50,19 @@
   z-index: 3;
 }
 
-.hero-text-readable { text-shadow: 0 1px 1px rgba(245,245,242,.35); }
+.hero-shell h1,
+.hero-shell p,
+.relative.overflow-hidden.grid-bg h1,
+.relative.overflow-hidden.grid-bg p {
+  text-shadow: 0 1px 2px rgba(245,245,242,.42);
+}
 
 @media (max-width: 700px) {
   .hero-grid-layer { background-size: 40px 40px; }
-  .hero-text-readable { text-shadow: 0 1px 2px rgba(245,245,242,.45); }
-  .hero-shell > .container,
-  .relative.overflow-hidden.grid-bg > .container { min-height: 0; }
+  .hero-shell h1,
+  .hero-shell p,
+  .relative.overflow-hidden.grid-bg h1,
+  .relative.overflow-hidden.grid-bg p {
+    text-shadow: 0 1px 3px rgba(245,245,242,.55);
+  }
 }
