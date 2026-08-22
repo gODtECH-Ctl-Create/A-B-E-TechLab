@@ -17,17 +17,18 @@ export default function HeroVisualCarousel({ visuals, interval = DEFAULT_INTERVA
   if (!visuals.length) return null;
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div className="hero-visual-layer" aria-hidden="true">
       {visuals.map((visual, index) => (
         <img
           key={visual.src}
           src={visual.src}
           alt=""
-          className={`absolute inset-0 h-full w-full object-contain object-center transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.54]' : 'opacity-0'}`}
+          className={`transition-opacity duration-[1200ms] ease-in-out ${index === active ? 'opacity-[.48]' : 'opacity-0'}`}
           loading={index === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />
       ))}
+      <div className="hero-grid-layer" />
     </div>
   );
 }
