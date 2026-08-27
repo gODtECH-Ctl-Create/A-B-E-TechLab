@@ -1,15 +1,18 @@
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { media } from '@/lib/media';
 
 export default function FounderCard() {
+  const founder = media.founder.primary;
+
   return (
     <article className="grid overflow-hidden border border-black/10 bg-[#11110f] text-white md:grid-cols-[.9fr_1.1fr]">
       <div className="relative min-h-[420px] bg-[#22221f] md:min-h-[560px]">
         <Image
-          src="/images/founder.webp"
-          alt="Ayo Richard ABE, Founder and Chief Executive Officer of ABE TechLab"
+          src={founder.src}
+          alt={founder.alt}
           fill
           priority
+          quality={100}
           sizes="(max-width: 768px) 100vw, 45vw"
           className="object-cover object-top"
         />
