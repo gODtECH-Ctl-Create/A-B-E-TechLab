@@ -1,3 +1,5 @@
+import type { MediaAsset } from '@/lib/media';
+
 export type TeamMember = {
   name: string;
   role: string;
@@ -5,6 +7,7 @@ export type TeamMember = {
   bio: string;
   initials: string;
   note?: string;
+  photo?: MediaAsset;
 };
 
 export const team: TeamMember[] = [
@@ -14,6 +17,11 @@ export const team: TeamMember[] = [
     type: 'Human',
     bio: 'Leads ABE TechLab across product strategy, research, technology, product development and product marketing.',
     initials: 'ARA',
+    photo: {
+      src: '/images/founder.webp',
+      alt: 'Ayo Richard ABE, Founder and Chief Executive Officer (CEO) of ABE TechLab',
+      kind: 'photo',
+    },
   },
   {
     name: 'ARIA',
