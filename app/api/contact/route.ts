@@ -2,17 +2,21 @@ import { NextResponse } from 'next/server';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE_LENGTH = 5000;
+const ALLOWED_CHANNELS = ['website_chat', 'whatsapp', 'voice_call', 'email'] as const;
+type PreferredChannel = typeof ALLOWED_CHANNELS[number];
 
 async function sendConfirmationEmail({
   name,
   email,
   need,
   timeline,
+  preferredChannel,
 }: {
   name: string;
   email: string;
   need: string;
   timeline: string;
+  preferredChannel: PreferredChannel;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
@@ -21,6 +25,14 @@ async function sendConfirmationEmail({
     console.warn('RESEND_API_KEY or RESEND_FROM_EMAIL is not configured; skipping visitor confirmation email.');
     return;
   }
+
+  const channelLabels: Record<PreferredChannel, string> = {
+    website_chat: 'website chat',
+    whatsapp: 'WhatsApp',
+    voice_call: 'a phone call',
+    email: 'email',
+  };
+  const channelLabel = channelLabels[preferredChannel];
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -32,8 +44,8 @@ async function sendConfirmationEmail({
       from,
       to: [email],
       subject: 'Thank you for contacting ABE TechLab',
-      text: `Hi ${name},\n\nThank you for contacting ABE TechLab. We’ve received your enquiry and will get back to you in a jiffy.\n\nWhat you contacted us about: ${need}\nTimeline: ${timeline || 'Not specified'}\n\nWe appreciate you reaching out and look forward to learning more about what you’re building.\n\nABE TechLab`,
-      html: `<div style="font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:#15171a;max-width:600px;margin:0 auto;padding:32px 20px"><div style="display:inline-flex;align-items:center;background:#11110f;color:#b7ff3c;padding:10px 14px;font-weight:800;letter-spacing:.08em">ABE</div><p style="margin-top:32px">Hi ${name},</p><h1 style="font-size:28px;line-height:1.15;margin:0 0 16px">Thank you for contacting ABE TechLab.</h1><p>We’ve received your enquiry and will get back to you in a jiffy.</p><div style="margin:24px 0;padding:18px;background:#f4f5f7;border:1px solid #e1e4e8"><strong>Your enquiry</strong><p style="margin:10px 0 0"><b>Area:</b> ${need}<br/><b>Timeline:</b> ${timeline || 'Not specified'}</p></div><p>We appreciate you reaching out and look forward to learning more about what you’re building.</p><p style="margin-top:28px"><b>ABE TechLab</b><br/>Product · Research · Education · Technology</p></div>`,
+      text: `Hi ${name},\n\nThank you for contacting ABE TechLab. We’ve received your enquiry and will continue the conversation through ${channelLabel}.\n\nWhat you contacted us about: ${need}\nTimeline: ${timeline || 'Not specified'}\nPreferred follow-up: ${channelLabel}\n\nWe appreciate you reaching out and look forward to learning more about what you’re building.\n\nABE TechLab`,
+      html: `<div style="font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:#15171a;max-width:600px;margin:0 auto;padding:32px 20px"><div style="display:inline-flex;align-items:center;background:#11110f;color:#b7ff3c;padding:10px 14px;font-weight:800;letter-spacing:.08em">ABE</div><p style="margin-top:32px">Hi ${name},</p><h1 style="font-size:28px;line-height:1.15;margin:0 0 16px">Thank you for contacting ABE TechLab.</h1><p>We’ve received your enquiry and will continue the conversation through <b>${channelLabel}</b>.</p><div style="margin:24px 0;padding:18px;background:#f4f5f7;border:1px solid #e1e4e8"><strong>Your enquiry</strong><p style="margin:10px 0 0"><b>Area:</b> ${need}<br/><b>Timeline:</b> ${timeline || 'Not specified'}<br/><b>Preferred follow-up:</b> ${channelLabel}</p></div><p>We appreciate you reaching out and look forward to learning more about what you’re building.</p><p style="margin-top:28px"><b>ABE TechLab</b><br/>Product · Research · Education · Technology</p></div>`,
     }),
     cache: 'no-store',
   });
@@ -48,6 +60,7 @@ async function sendOperationsIntake({
   need,
   timeline,
   message,
+  preferredChannel,
 }: {
   name: string;
   email: string;
@@ -55,6 +68,7 @@ async function sendOperationsIntake({
   need: string;
   timeline: string;
   message: string;
+  preferredChannel: PreferredChannel;
 }) {
   const intakeUrl = process.env.OPERATIONS_INTAKE_URL;
   const intakeSecret = process.env.OPERATIONS_INTAKE_SECRET;
@@ -73,7 +87,7 @@ async function sendOperationsIntake({
         'x-website-intake-secret': intakeSecret,
         'x-website-intake-id': intakeId,
       },
-      body: JSON.stringify({ intake_id: intakeId, name, email, company, need, timeline, message }),
+      body: JSON.stringify({ intake_id: intakeId, name, email, company, need, timeline, message, preferred_channel: preferredChannel }),
       cache: 'no-store',
       signal: AbortSignal.timeout(10000),
     });
@@ -92,7 +106,7 @@ async function sendOperationsIntake({
       return { ok: false, reason: 'rejected' as const, status: response.status };
     }
 
-    console.info('Operations website intake accepted:', { intakeId, leadId: result.lead_id, duplicate: result.duplicate === true });
+    console.info('Operations website intake accepted:', { intakeId, leadId: result.lead_id, duplicate: result.duplicate === true, preferredChannel });
     return { ok: true, intakeId, leadId: result.lead_id, duplicate: result.duplicate === true };
   } catch (error) {
     console.error('Operations website intake request failed:', { intakeId, error: error instanceof Error ? error.message : String(error) });
@@ -109,8 +123,9 @@ export async function POST(request: Request) {
     const need = String(body.need ?? '').trim();
     const timeline = String(body.timeline ?? '').trim();
     const message = String(body.message ?? '').trim();
+    const preferredChannel = String(body.preferred_channel ?? '').trim() as PreferredChannel;
 
-    if (!name || !EMAIL_RE.test(email) || !need || !message || message.length > MAX_MESSAGE_LENGTH) {
+    if (!name || !EMAIL_RE.test(email) || !need || !message || message.length > MAX_MESSAGE_LENGTH || !ALLOWED_CHANNELS.includes(preferredChannel)) {
       return NextResponse.json({ error: 'Please complete the required fields correctly.' }, { status: 400 });
     }
 
@@ -123,7 +138,7 @@ export async function POST(request: Request) {
     const response = await fetch(scriptUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, company, need, timeline, message }),
+      body: JSON.stringify({ name, email, company, need, timeline, message, preferred_channel: preferredChannel }),
       cache: 'no-store',
     });
 
@@ -134,8 +149,8 @@ export async function POST(request: Request) {
     if (result.ok === false) return NextResponse.json({ error: 'Unable to send the enquiry right now.' }, { status: 502 });
 
     const [operationsResult] = await Promise.all([
-      sendOperationsIntake({ name, email, company, need, timeline, message }),
-      sendConfirmationEmail({ name, email, need, timeline }),
+      sendOperationsIntake({ name, email, company, need, timeline, message, preferredChannel }),
+      sendConfirmationEmail({ name, email, need, timeline, preferredChannel }),
     ]);
 
     if (!operationsResult.ok) {
@@ -145,7 +160,7 @@ export async function POST(request: Request) {
       }, { status: 502 });
     }
 
-    return NextResponse.json({ ok: true, operations: { recorded: true, duplicate: operationsResult.duplicate === true } });
+    return NextResponse.json({ ok: true, operations: { recorded: true, duplicate: operationsResult.duplicate === true }, preferred_channel: preferredChannel });
   } catch (error) {
     console.error('Contact submission failed:', error);
     return NextResponse.json({ error: 'Unable to process the enquiry.' }, { status: 500 });
