@@ -23,7 +23,7 @@ async function sendOperationsIntake({ name, email, phone, company, need, timelin
   try {
     const response = await fetch(intakeUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-website-intake-secret': intakeSecret, 'x-website-intake-id': intakeId }, body: JSON.stringify({ intake_id: intakeId, name, email, phone, company, need, timeline, message, preferred_channel: preferredChannel }), cache: 'no-store', signal: AbortSignal.timeout(10000) });
     const raw = await response.text();
-    let result: { ok?: boolean; error?: string; lead_id?: string; duplicate?: boolean } = {};
+    let result: { ok?: boolean; error?: string; lead_id?: string; duplicate?: boolean; assistant?: Record<string, unknown> } = {};
     try { result = raw ? JSON.parse(raw) : {}; } catch {}
     if (!response.ok || result.ok === false) return { ok: false, reason: 'rejected' as const, status: response.status };
     return { ok: true, intakeId, leadId: result.lead_id, duplicate: result.duplicate === true, assistant: result.assistant };
